@@ -1,38 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Varela+Round&display=swap');
+
+
+
+
 .App {
-  text-align: center;
+  /* font-family: 'Poppins', sans-serif!important; */
+  font-family: 'Varela Round', sans-serif!important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.Toast{
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  border: none!important;
+margin: 5px 0;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Entries{
   display: flex;
   flex-direction: column;
+  justify-content: start;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+}
+.debit{
+  border: 1px solid green!important;
+  background-color: green!important;
+  color: rgb(255, 255, 255)!important;
+  
+
 }
 
-.App-link {
-  color: #61dafb;
+.credit{
+  border: 1px solid rgb(121, 18, 13)!important;
+  background-color: rgb(121, 18, 13)!important;
+  color: rgb(255, 255, 255)!important;
+  
+
+}
+.record-submit{
+  width: 50%;
+  margin: 0 20%;
+}
+.record-details{
+  display: flex; 
+	justify-content:space-between;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
