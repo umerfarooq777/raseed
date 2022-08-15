@@ -30,6 +30,11 @@ function AddRecords() {
 
     const [data,setData] =useState(objData)
     console.log("🚀 ~ file: addRecord.js ~ line 28 ~ AddRecords ~ data", data)
+    const [debitData, setDebitData] = useState([])
+    const [creditData, setCreditData] = useState([])    
+
+    
+    const [counter, setCounter] = useState(0)
 
     const db = FirebaseStack();
   
@@ -46,6 +51,7 @@ const handleAddRecord = (event) => {
     }
 
     setValidated(true);
+    
   };
 
 const handelData =(e)=>{
@@ -57,19 +63,61 @@ const addRecord =(e)=>{
     
     setrecordsDataObj([...recordsDataObj,data]);
     console.log("🚀 ~ file: addRecord.js ~ line 62 ~ addRecord ~ records", recordsDataObj)
+    if (data.type === 'debit') {
+        setDebitData([...debitData, data])
+    }
+    else {
+        setCreditData([...creditData, data])
+    }
 }
 
 
 const submitRecords=(e)=>{
     e.preventDefault();
-    var submitableData = recordsDataObj;
-    set(ref(db,'record/' +Math.floor(Math.random() *1000)),{
-        submitableData
-    });
-    setrecordsDataObj([]);
-    objData={}
-    setData(objData)
+    var today = new Date();
+    var date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+
+        var data01 = []
+        const obj = { 'debit': debitData }
+        const obj1 = { 'credit': creditData }
+        // data01.push(`${date} ${time}`)
+        data01.push(obj)
+        data01.push(obj1)
+
+
+
+
+
+
+        var submitableData = recordsDataObj;
+        
+        set(ref(db,'record/' + counter),{
+            'credit': creditData,
+            'debit': debitData
+        });
+        setrecordsDataObj([]);
+        setData('')
+
+        setCounter(counter + 1)
+    }
+
+const removeRecord=(key)=>{
+   delete recordsDataObj[key];
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <Container>
@@ -108,8 +156,8 @@ const submitRecords=(e)=>{
 
 
         
-        <Form>      
         {/* =================Submit Records Form =================== */}
+        <Form>      
 
 
             <div className='record-details'>
@@ -166,7 +214,7 @@ const submitRecords=(e)=>{
                 <Toast show={showA} className={obj.type == "debit"? 'debit Toast' : 'credit Toast'}>        
           <Toast.Header>
             <strong className="me-auto">{obj.title}</strong>
-            <small>{obj.category}</small>
+            <small>{obj.category}{key}</small>
           </Toast.Header>
           <Toast.Body>$ {obj.amount}</Toast.Body>
         </Toast>
