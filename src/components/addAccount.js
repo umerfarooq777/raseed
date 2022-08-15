@@ -1,5 +1,5 @@
 import {Button,Modal,Form,FloatingLabel} from 'react-bootstrap';
-import React ,{useState} from 'react';
+import React ,{useState,useEffect} from 'react';
 import FirebaseStack from '../firebase-config';
 import {ref,set, get, child} from "firebase/database"
 
@@ -7,10 +7,33 @@ function AddAccount() {
     
     const [accounts, setAccounts] = useState([]);
     
-    const [newAccounts, setNewAccounts] = useState(accounts);
+    const [newAccounts, setNewAccounts] = useState([]);
     const [validated, setValidated] = useState(false);
 
+    const dbRef = ref(FirebaseStack());
     const db = FirebaseStack();
+    ///////////////===================================
+
+    const getDataFromFirebase = async () => {
+        get(child(dbRef, `accounts/`))
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+            //   setFirebaseData(snapshot.val());
+            //   setStopData(false);
+            setNewAccounts(snapshot.val())
+            } else {
+              console.log("No acc available");
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
+    
+      useEffect(() => {
+        getDataFromFirebase();
+      }, []);
+
 
     ////============================================
     const handleAddRecord = (event) => {
@@ -33,12 +56,12 @@ function AddAccount() {
     const addAccount=()=>{
         setNewAccounts([...newAccounts,accounts])
         
-            set(ref(db,'accounts/'+newAccounts.length),{ 
-                newAccounts
-            });
+            set(ref(db,'accounts/'+newAccounts.length), 
+            newAccounts
+            );
             setAccounts([])
         }
-        console.log(accounts)
+        // console.log(accounts)
 
         console.log(newAccounts)
 

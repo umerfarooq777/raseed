@@ -40,6 +40,7 @@ function GeneralRecords() {
   return (
     <>
       <Container>
+      <h2>General Journal</h2>
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>

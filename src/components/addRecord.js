@@ -42,7 +42,7 @@ function AddRecords() {
     const [creditData, setCreditData] = useState([])    
 
     
-    const [counter, setCounter] = useState(0)
+    const [accTitles, setAccTitles] = useState([])
 
     const db = FirebaseStack();
   
@@ -52,13 +52,11 @@ function AddRecords() {
 /////=========================Get id
 
 const getDataFromFirebase = async () => {
-  get(child(dbRef, `record/`))
+  get(child(dbRef, `accounts/`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-      //   setFirebaseData(snapshot.val());
-      //   setStopData(false);
-      setGeneralRecords(snapshot.val())
-      setStopFeed(true)
+      setAccTitles(snapshot.val())
+      console.log(accTitles)
       } else {
         console.log("No data available");
       }
@@ -68,7 +66,22 @@ const getDataFromFirebase = async () => {
     });
 };
 
+const getDataFromFirebaseACC = async () => {
+  get(child(dbRef, `record/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+      setGeneralRecords(snapshot.val())
+      } else {
+        console.log("No Accounts Available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 useEffect(() => {
+  getDataFromFirebaseACC();
   getDataFromFirebase();
 }, []);
 
@@ -136,9 +149,6 @@ const submitRecords=(e)=>{
 
 
 
-
-
-
   return (
     <Container>
       <Row className='debit-form mt-5'>
@@ -151,10 +161,15 @@ const submitRecords=(e)=>{
        
           <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>
             <option>Account</option>
+            {
+        accTitles && accTitles.map((obj, key)=>{
+            return(
+                <>
+        </>
+        )
+        })
+    }
             <option value="asset">Asset</option>
-            <option value="liability">Liability</option>
-            <option value="equity">Equity</option>
-            <option value="revenue">Revenue</option>
           </Form.Select>
         
 
