@@ -92,7 +92,7 @@ const submitRecords=(e)=>{
 
         var submitableData = recordsDataObj;
         
-        set(ref(db,'record/' + counter),{
+        set(ref(db,'record/' + counter),{   
             'credit': creditData,
             'debit': debitData
         });

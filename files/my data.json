@@ -1,0 +1,28 @@
+{
+  "record": [
+    {
+      "credit": [
+        {
+          "amount": "2000",
+          "category": "asset",
+          "title": "cash",
+          "type": "credit"
+        },
+        {
+          "amount": "1000",
+          "category": "liability",
+          "title": "notes Payable",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "3000",
+          "category": "asset",
+          "title": "land",
+          "type": "debit"
+        }
+      ]
+    }
+  ]
+}

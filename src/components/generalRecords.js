@@ -3,6 +3,7 @@ import Table from "react-bootstrap/Table";
 import { ref, get, child } from "firebase/database";
 import FirebaseStack from "../firebase-config";
 import { Container } from "react-bootstrap";
+import Record from "./record";
 // import TableContent from "react-bootstrap/TableContent";
 
 function GeneralRecords() {
@@ -10,27 +11,8 @@ function GeneralRecords() {
   const [stopData, setStopData] = useState(true);
 
   const dbRef = ref(FirebaseStack());
+////=========================================================
 
-  // const getDataFromFirebase = async () => {
-  //     get(child(dbRef, `record/`)).then((snapshot) => {
-  //         if (snapshot.exists()) {
-
-  //             setGeneralRecords(snapshot.val())
-  //             console.log("🚀 ~ file: generalRecords.js ~ line 22 ~ get ~ snapshot", snapshot)
-  //             console.log("🚀 ~ file: generalRecords.js ~ line 11 ~ GeneralRecords ~ generalRecords", generalRecords)
-  //             setStopData(false)
-
-  //         } else {
-  //             console.log("No data available");
-  //         }
-  //     }).catch((error) => {
-  //         console.error(error);
-  //     });
-  // }
-
-  // useEffect(() => {
-  //     getDataFromFirebase()
-  // }, [])
 
   const getDataFromFirebase = async () => {
     get(child(dbRef, `record/`))
@@ -51,6 +33,10 @@ function GeneralRecords() {
   useEffect(() => {
     getDataFromFirebase();
   }, []);
+
+
+
+  ////=========================================================
   return (
     <>
       <Container>
@@ -82,18 +68,11 @@ function GeneralRecords() {
           <tbody>
             {generalRecords ? (
               generalRecords.map((obj, key) => {
-                console.log("🚀 ~ file: generalRecords.js ~ line 85 ~ generalRecords.map ~ obj", obj)
+                var index=key;
+                console.log("🚀 ~ file: generalRecords.js ~ line 86 ~ generalRecords.map ~ obj", obj)
                 return (
                   <>
-                    <tr key={key} debit={obj.debit} credit={obj.credit}>
-                      <td>1</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                    </tr>
+                    <Record key={key} debit={obj.debit} credit={obj.credit}/>
                   </>
                 );
               })
@@ -110,6 +89,7 @@ function GeneralRecords() {
             )}
           </tbody>
         </Table>
+        
       </Container>
     </>
   );
