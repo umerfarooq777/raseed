@@ -4,7 +4,7 @@
       "credit": [
         {
           "amount": "48000",
-          "nature": "liability",
+          "category": "liability",
           "title": "capital ",
           "type": "credit"
         }
@@ -12,7 +12,7 @@
       "debit": [
         {
           "amount": "48000",
-          "nature": "asset",
+          "category": "asset",
           "title": "cash",
           "type": "debit"
         }
@@ -22,13 +22,13 @@
       "credit": [
         {
           "amount": "28000",
-          "nature": "liability",
+          "category": "liability",
           "title": "cash",
           "type": "credit"
         },
         {
           "amount": "112000",
-          "nature": "liability",
+          "category": "liability",
           "title": "note payable ",
           "type": "credit"
         }
@@ -36,7 +36,7 @@
       "debit": [
         {
           "amount": "140000",
-          "nature": "asset",
+          "category": "asset",
           "title": "land",
           "type": "debit"
         }
@@ -46,7 +46,7 @@
       "credit": [
         {
           "amount": "4000",
-          "nature": "liability",
+          "category": "liability",
           "title": "cash",
           "type": "credit"
         }
@@ -54,7 +54,7 @@
       "debit": [
         {
           "amount": "4000",
-          "nature": "asset",
+          "category": "asset",
           "title": "building",
           "type": "debit"
         }
@@ -64,7 +64,7 @@
       "credit": [
         {
           "amount": "3000",
-          "nature": "liability",
+          "category": "liability",
           "title": "account payable ",
           "type": "credit"
         }
@@ -72,7 +72,7 @@
       "debit": [
         {
           "amount": "3000",
-          "nature": "asset",
+          "category": "asset",
           "title": "office equipment ",
           "type": "debit"
         }
@@ -82,7 +82,7 @@
       "credit": [
         {
           "amount": "2000",
-          "nature": "liability",
+          "category": "liability",
           "title": "CASH",
           "type": "credit"
         }
@@ -90,7 +90,7 @@
       "debit": [
         {
           "amount": "2000",
-          "nature": "asset",
+          "category": "asset",
           "title": "account payable ",
           "type": "debit"
         }

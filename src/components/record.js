@@ -25,7 +25,7 @@ const Record = ({ key,debit, credit }) => {
                         <td></td>
                         <td>{obj.title}</td>
                         <td>{obj.amount}</td>
-                        <td>{obj.nature}</td>
+                        <td>{obj.category}</td>
                         <td>{obj.type == "debit" ? 'debit' : null}</td>
                         <td>{obj.type == "credit" ? 'credit' : null}</td>
                         <td>{`${date} ${time}`}</td>
@@ -40,7 +40,7 @@ const Record = ({ key,debit, credit }) => {
                         <td></td>
                         <td>{obj2.title}</td>
                         <td>{obj2.amount}</td>
-                        <td>{obj2.nature}</td>
+                        <td>{obj2.category}</td>
                         <td>{obj2.type == "debit" ? 'debit' : null}</td>
                         <td>{obj2.type == "credit" ? 'credit' : null}</td>
                         <td>{`${date} ${time}`}</td>
