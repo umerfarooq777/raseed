@@ -68,11 +68,9 @@ function GeneralRecords() {
           <tbody>
             {generalRecords ? (
               generalRecords.map((obj, key) => {
-                var index=key;
-                console.log("🚀 ~ file: generalRecords.js ~ line 86 ~ generalRecords.map ~ obj", obj)
                 return (
                   <>
-                    <Record key={key} debit={obj.debit} credit={obj.credit}/>
+                    <Record className='recorddivider' key={key} debit={obj.debit} credit={obj.credit}/>
                   </>
                 );
               })

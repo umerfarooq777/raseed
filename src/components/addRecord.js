@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from 'react-bootstrap/Card';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -10,7 +10,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
 import FirebaseStack from '../firebase-config';
-import {ref,set} from "firebase/database"
+import {ref,set, get, child} from "firebase/database"
+import AddAccount from './addAccount';
 
 const objData ={
     title: "",
@@ -23,13 +24,20 @@ function AddRecords() {
     const [validated, setValidated] = useState(false);
     const [recordsDataObj, setrecordsDataObj]= useState([])
     // console.log("🚀 ~ file: addRecord.js ~ line 28 ~ AddRecords ~ recordsDataObj", recordsDataObj[1].tilte)
+   
+   /////===========================================get Database id
+    const [generalRecords, setGeneralRecords] = useState([]); 
+    const [stopFeed, setStopFeed] = useState(false);   
+    const dbRef = ref(FirebaseStack());
 
+
+    /////===========================================add accounts
+    
 
     const [showA, setShowA] = useState(true);
     const [showB, setShowB] = useState(true);
 
     const [data,setData] =useState(objData)
-    console.log("🚀 ~ file: addRecord.js ~ line 28 ~ AddRecords ~ data", data)
     const [debitData, setDebitData] = useState([])
     const [creditData, setCreditData] = useState([])    
 
@@ -40,6 +48,32 @@ function AddRecords() {
   
     const toggleShowA = () => setShowA(!showA);
     const toggleShowB = () => setShowB(!showB);
+
+/////=========================Get id
+
+const getDataFromFirebase = async () => {
+  get(child(dbRef, `record/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+      //   setFirebaseData(snapshot.val());
+      //   setStopData(false);
+      setGeneralRecords(snapshot.val())
+      setStopFeed(true)
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+useEffect(() => {
+  getDataFromFirebase();
+}, []);
+
+
+
 
 /////========================================
 
@@ -62,7 +96,6 @@ const addRecord =(e)=>{
     e.preventDefault();
     
     setrecordsDataObj([...recordsDataObj,data]);
-    console.log("🚀 ~ file: addRecord.js ~ line 62 ~ addRecord ~ records", recordsDataObj)
     if (data.type === 'debit') {
         setDebitData([...debitData, data])
     }
@@ -73,7 +106,7 @@ const addRecord =(e)=>{
 
 
 const submitRecords=(e)=>{
-    e.preventDefault();
+    // e.preventDefault();
     var today = new Date();
     var date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
@@ -85,29 +118,16 @@ const submitRecords=(e)=>{
         data01.push(obj)
         data01.push(obj1)
 
-
-
-
-
-
         var submitableData = recordsDataObj;
         
-        set(ref(db,'record/' + counter),{   
+        set(ref(db,'record/' + generalRecords.length),{   
             'credit': creditData,
             'debit': debitData
         });
         setrecordsDataObj([]);
         setData('')
 
-        setCounter(counter + 1)
     }
-
-const removeRecord=(key)=>{
-   delete recordsDataObj[key];
-
-}
-
-
 
 
 
@@ -123,13 +143,20 @@ const removeRecord=(key)=>{
     <Container>
       <Row className='debit-form mt-5'>
         <Col>
+        <AddAccount/>
 
         {/* =================Add Record Form =================== */}
         <Form noValidate validated={validated} onSubmit={handleAddRecord}>
         <h2>Add Records</h2>
-        <FloatingLabel controlId="floatingInputGrid" label="Account Title" className="mb-3">
-          <Form.Control type="text" placeholder="name@example.com" onChange={(e)=>{handelData(e)} } name='title'/>
-        </FloatingLabel>
+       
+          <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>
+            <option>Account</option>
+            <option value="asset">Asset</option>
+            <option value="liability">Liability</option>
+            <option value="equity">Equity</option>
+            <option value="revenue">Revenue</option>
+          </Form.Select>
+        
 
         <FloatingLabel controlId="floatingInputGrid" label="Amount" className="mb-3">
           <Form.Control type="number" placeholder="name@example.com" onChange={(e)=>{handelData(e)}} name='amount' />
@@ -208,7 +235,6 @@ const removeRecord=(key)=>{
        
     {
         recordsDataObj && recordsDataObj.map((obj, key)=>{
-            console.log("🚀 ~ file: addRecord.js ~ line 164 ~ records.map ~ obj", obj)
             return(
                 <>
                 <Toast show={showA} className={obj.type == "debit"? 'debit Toast' : 'credit Toast'}>        

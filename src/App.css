@@ -46,7 +46,7 @@ margin: 5px 0;
 }
 .recorddivider{
   width: 100%;
-  border-top: 5px solid rgb(226, 226, 226);
+  border-top: 3px solid rgb(226, 226, 226)!important;
 }
 
 

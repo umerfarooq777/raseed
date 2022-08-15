@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 // import TableContentSub from './TableContentSub'
 
-const Record = ({ key,debit, credit }) => {
+const Record = ({ debit, credit }) => {
 
-    const [keyData, setKeyData] = useState(key)
+    // const [keyData, setKeyData] = useState(key)
     const [debitData, setDebitData] = useState(debit)
     // console.log("🚀 ~ file: TableContent.js ~ line 7 ~ TableContent ~ debitData", debitData)
     const [creditData, setCreditData] = useState(credit)
@@ -20,7 +20,7 @@ const Record = ({ key,debit, credit }) => {
         
             {debitData && debitData.map((obj, key) => {
                 return (<>
-                    <span className='recorddivider'></span>
+                    {/* <div className='recorddivider'></div> */}
                     <tr className='recorddivider'>
                         <td></td>
                         <td>{obj.title}</td>
