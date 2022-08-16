@@ -27,7 +27,12 @@ margin: 5px 0;
   
 
 }
-
+.debit-text{
+  color:  rgb(21, 197, 21)!important;
+}
+.credit-text{
+  color:  rgb(233, 40, 40)!important;
+}
 .credit{
   border: 1px solid rgb(121, 18, 13)!important;
   background-color: rgb(121, 18, 13)!important;

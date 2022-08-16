@@ -83,7 +83,7 @@
         {
           "amount": "2000",
           "category": "liability",
-          "title": "CASH",
+          "title": "cash",
           "type": "credit"
         }
       ],

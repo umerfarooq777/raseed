@@ -30,7 +30,8 @@ function AddRecords() {
     const [stopFeed, setStopFeed] = useState(false);   
     const dbRef = ref(FirebaseStack());
 
-
+    const [datafirebase, setdatafirebase]=useState([])
+    // console.log("🚀 ~ file: addRecord.js ~ line 34 ~ AddRecords ~ datafirebase", datafirebase)
     /////===========================================add accounts
     
 
@@ -41,32 +42,57 @@ function AddRecords() {
     const [debitData, setDebitData] = useState([])
     const [creditData, setCreditData] = useState([])    
 
-    
-    const [accTitles, setAccTitles] = useState([])
-
-    const db = FirebaseStack();
+    let transactionsLen = datafirebase.length;
+    console.log("🚀 ~ file: addRecord.js ~ line 46 ~ AddRecords ~ transactionsLen", transactionsLen)
+ 
+    const db = FirebaseStack(); 
   
     const toggleShowA = () => setShowA(!showA);
     const toggleShowB = () => setShowB(!showB);
 
 /////=========================Get id
 
-const getDataFromFirebase = async () => {
-  get(child(dbRef, `accounts/`))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-      setAccTitles(snapshot.val())
-      console.log(accTitles)
-      } else {
-        console.log("No data available");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
+useEffect(() => {
+    getDataFromFirebase();
+    getDataFromFirebaseRecords();
+  }, []);
+  
 
-const getDataFromFirebaseACC = async () => {
+// const getDataFromFirebase = async () => {
+//   get(child(dbRef,`transactions/`))
+//     .then((snapshot) => {
+//       if (snapshot.exists()) {
+//         setTransactions(snapshot.val())
+//         setTransactionsLen(transactionsLen.length)
+//       console.log(transactions)
+//       console.log(transactions.length)
+//       } else {
+//         console.log("No data available");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// };
+
+const getDataFromFirebase = async () => {
+    get(child(dbRef, `transactions/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+        //   setFirebaseData(snapshot.val());
+        //   setStopData(false);
+        setdatafirebase(snapshot.val())
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
+const getDataFromFirebaseRecords = async () => {
   get(child(dbRef, `record/`))
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -79,11 +105,6 @@ const getDataFromFirebaseACC = async () => {
       console.error(error);
     });
 };
-
-useEffect(() => {
-  getDataFromFirebaseACC();
-  getDataFromFirebase();
-}, []);
 
 
 
@@ -115,6 +136,10 @@ const addRecord =(e)=>{
     else {
         setCreditData([...creditData, data])
     }
+
+    set(ref(dbRef, 'transactions/'+transactionsLen), {
+        data
+    });
 }
 
 
@@ -153,7 +178,7 @@ const submitRecords=(e)=>{
     <Container>
       <Row className='debit-form mt-5'>
         <Col>
-        <AddAccount/>
+        {/* <AddAccount/> */}
 
         {/* =================Add Record Form =================== */}
         <Form noValidate validated={validated} onSubmit={handleAddRecord}>
@@ -161,12 +186,12 @@ const submitRecords=(e)=>{
        
           <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>
             <option>Select Account</option>
-            <option value="Cash">Cash</option>
-            <option value="Capital">Capital</option>
-            <option value="Building">Building</option>
-            <option value="Office Equipment">Office Equipment</option>
-            <option value="Notes Payable">Notes Payable</option>
-            <option value="Accounts Payable">Accounts Payable</option>
+            <option value="cash">Cash</option>
+            <option value="capital">Capital</option>
+            <option value="building">Building</option>
+            <option value="officeEquipment">Office Equipment</option>
+            <option value="notesPayable">Notes Payable</option>
+            <option value="accountsPayable">Accounts Payable</option>
           </Form.Select>
         
 

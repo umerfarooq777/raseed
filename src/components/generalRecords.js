@@ -48,8 +48,7 @@ function GeneralRecords() {
               <th>Account Name</th>
               <th>Amount</th>
               <th>Code</th>
-              <th>Debit</th>
-              <th>Credit</th>
+              <th>type</th>
               <th>Date</th>
             </tr>
           </thead>

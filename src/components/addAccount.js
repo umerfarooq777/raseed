@@ -63,7 +63,7 @@ function AddAccount() {
         }
         // console.log(accounts)
 
-        console.log(newAccounts)
+        // console.log(newAccounts)
 
   return (
    <>

@@ -26,8 +26,7 @@ const Record = ({ index,debit, credit }) => {
                         <td>{obj.title}</td>
                         <td>{obj.amount}</td>
                         <td>{obj.category}</td>
-                        <td>{obj.type == "debit" ? 'debit' : null}</td>
-                        <td>{obj.type == "credit" ? 'credit' : null}</td>
+                         <td className={obj.type == "debit"? 'debit-text' : 'credit-text'}>{obj.type == "debit" ? 'debit' : 'credit'}</td>
                         <td>{`${date} ${time}`}</td>
                     </tr>
                     </>
@@ -41,8 +40,7 @@ const Record = ({ index,debit, credit }) => {
                         <td>{obj2.title}</td>
                         <td>{obj2.amount}</td>
                         <td>{obj2.category}</td>
-                        <td>{obj2.type == "debit" ? 'debit' : null}</td>
-                        <td>{obj2.type == "credit" ? 'credit' : null}</td>
+                        <td className={obj2.type == "debit"? 'debit-text' : 'credit-text'}>{obj2.type == "debit" ? 'debit' : 'credit'}</td>
                         <td>{`${date} ${time}`}</td>
                     </tr>
                 )

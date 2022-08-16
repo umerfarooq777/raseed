@@ -22,28 +22,45 @@ function Ledger() {
         //   setFirebaseData(snapshot.val());
         //   setStopData(false);
         setGeneralRecords(snapshot.val())
+        
+  // console.log(generalRecords[0].debit[0].title+""+generalRecords[0].debit[0].title)
         } else {
           console.log("No data available");
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error); 
       });
   };
 
   useEffect(() => {
     getDataFromFirebase();
   }, []);
+const loop = generalRecords.length
 
 
+  // console.log(generalRecords[0].debit)
 
   ////=========================================================
   return (
     <>
       <Container>
-      <h2>Ledger</h2>
+    
+      {/* for(i=0;  i =< generalRecords.length ; i++){
+        <p>{i}</p>
+      } */}
+    
+    {(() => {
+
+          for (let i = 2017; i < loop ; i++) {
+           console.log(i)
+          }
+
+        })()}
+
+      <h2>---</h2>
         <Table striped bordered hover variant="dark">
-          <thead>
+           <thead>
             <tr>
               <th>#</th>
               <th>Date</th>
@@ -53,9 +70,9 @@ function Ledger() {
               <th>Credit</th>
               <th>Balance</th>
             </tr>
-          </thead>
+          </thead> 
 
-          {/* <tbody>               
+          <tbody>               
                     <tr>
                         <td>1</td>
                         <td>Mark</td>
@@ -65,14 +82,14 @@ function Ledger() {
                         <td>@mdo</td>
                         <td>@mdo</td>
                     </tr>                
-            </tbody> */}
+            </tbody>
 
           <tbody>
             {generalRecords ? (
               generalRecords.map((obj, key) => {
                 return (
                   <>
-                    <RecordLedger className='recorddivider' index={key+1} debit={obj.debit} credit={obj.credit}/>
+                    <RecordLedger index={key+1} debit={obj.debit} credit={obj.credit}/>
                   </>
                 );
               })
