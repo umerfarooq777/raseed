@@ -160,16 +160,13 @@ const submitRecords=(e)=>{
         <h2>Add Records</h2>
        
           <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>
-            <option>Account</option>
-            {
-        accTitles && accTitles.map((obj, key)=>{
-            return(
-                <>
-        </>
-        )
-        })
-    }
-            <option value="asset">Asset</option>
+            <option>Select Account</option>
+            <option value="Cash">Cash</option>
+            <option value="Capital">Capital</option>
+            <option value="Building">Building</option>
+            <option value="Office Equipment">Office Equipment</option>
+            <option value="Notes Payable">Notes Payable</option>
+            <option value="Accounts Payable">Accounts Payable</option>
           </Form.Select>
         
 

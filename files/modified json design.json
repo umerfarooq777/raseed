@@ -3,7 +3,7 @@
     {
       "credit": [
         {
-          "amount": "48000",
+          "amount": "45000",
           "category": "liability",
           "title": "capital ",
           "type": "credit"
@@ -11,7 +11,7 @@
       ],
       "debit": [
         {
-          "amount": "48000",
+          "amount": "45000",
           "category": "asset",
           "title": "cash",
           "type": "debit"

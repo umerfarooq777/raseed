@@ -3,6 +3,7 @@ import './App.css';
 
 import AddRecords from './components/addRecord';
 import GeneralRecords from './components/generalRecords';
+import Ledger from './components/Ledger';
 import NavbarApp from './components/navbar';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <NavbarApp/>
       <AddRecords/>
       {/* <GeneralRecords/> */}
+      <Ledger/>
     </div>
   );
 }

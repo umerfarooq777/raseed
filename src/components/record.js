@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import TableContentSub from './TableContentSub'
 
-const Record = ({ debit, credit }) => {
+const Record = ({ index,debit, credit }) => {
 
     // const [keyData, setKeyData] = useState(key)
     const [debitData, setDebitData] = useState(debit)
@@ -22,7 +22,7 @@ const Record = ({ debit, credit }) => {
                 return (<>
                     {/* <div className='recorddivider'></div> */}
                     <tr className='recorddivider'>
-                        <td></td>
+                        <td>{index}</td>
                         <td>{obj.title}</td>
                         <td>{obj.amount}</td>
                         <td>{obj.category}</td>

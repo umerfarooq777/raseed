@@ -4,9 +4,10 @@ import { ref, get, child } from "firebase/database";
 import FirebaseStack from "../firebase-config";
 import { Container } from "react-bootstrap";
 import Record from "./record";
+import RecordLedger from "./recordLedger";
 // import TableContent from "react-bootstrap/TableContent";
 
-function GeneralRecords() {
+function Ledger() {
   const [generalRecords, setGeneralRecords] = useState([]);
   const [stopData, setStopData] = useState(true);
 
@@ -40,17 +41,17 @@ function GeneralRecords() {
   return (
     <>
       <Container>
-      <h2>General Journal</h2>
+      <h2>Ledger</h2>
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
               <th>#</th>
-              <th>Account Name</th>
-              <th>Amount</th>
-              <th>Code</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Ref</th>
               <th>Debit</th>
               <th>Credit</th>
-              <th>Date</th>
+              <th>Balance</th>
             </tr>
           </thead>
 
@@ -71,7 +72,7 @@ function GeneralRecords() {
               generalRecords.map((obj, key) => {
                 return (
                   <>
-                    <Record className='recorddivider' index={key+1} debit={obj.debit} credit={obj.credit}/>
+                    <RecordLedger className='recorddivider' index={key+1} debit={obj.debit} credit={obj.credit}/>
                   </>
                 );
               })
@@ -94,4 +95,4 @@ function GeneralRecords() {
   );
 }
 
-export default GeneralRecords;
+export default Ledger;

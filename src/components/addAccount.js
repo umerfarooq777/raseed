@@ -69,7 +69,7 @@ function AddAccount() {
    <>
         <Form noValidate validated={validated} onSubmit={handleAddRecord}>
         <FloatingLabel controlId="floatingInputGrid" label="New Account Name">
-          <Form.Control type="text" placeholder="Account title" onChange={(e)=>{handelData(e)} } name='account'/>
+          <Form.Control type="text" placeholder="Enter New Account Title" onChange={(e)=>{handelData(e)} } name='account'/>
         </FloatingLabel>
 
 
