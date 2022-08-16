@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import { Link } from "react-router-dom";
 const NavbarApp=()=> {
 
     const [activeNav, setActiveNav] = useState('#')
@@ -14,7 +14,7 @@ const NavbarApp=()=> {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container >
-        <Navbar.Brand href="#" className='' style={{fontSize:35}}>RASEED</Navbar.Brand>
+       <Link to="/"><Navbar.Brand href="#" className='' style={{fontSize:35}}>RASEED</Navbar.Brand></Link> 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -22,10 +22,10 @@ const NavbarApp=()=> {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Dashboard</Nav.Link>
-            <Nav.Link href="#action1">Add Entries</Nav.Link>
-            <Nav.Link href="#action1">Ledger</Nav.Link>
-            <Nav.Link href="#action1">General Journal</Nav.Link>
+            <Link to="/"><Nav.Link>Dashboard</Nav.Link></Link>
+            <Link to="entries"><Nav.Link>Add Entries</Nav.Link></Link> 
+            <Link to="ledger"><Nav.Link>Ledger</Nav.Link></Link>
+            <Link to="gj"><Nav.Link>General Journal</Nav.Link></Link>
 
 {/* onClick={()=> setActiveNav('#')} className={ activeNav === '#' ? 'active' : ''} active */}
 

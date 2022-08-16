@@ -53,7 +53,9 @@ margin: 5px 0;
   width: 100%;
   border-top: 3px solid rgb(226, 226, 226)!important;
 }
-
+.slider{
+  height: 85vh!important;
+}
 
 
 

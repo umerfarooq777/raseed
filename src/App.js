@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GE from "./pages/GE";
 import DashboardP from "./pages/dashboard";
 import LedgerP from "./pages/Ledger";
+import EntriesP from "./pages/entries";
 // import your route components too
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<DashboardP/>} />
+        <Route index element={<DashboardP />} />
+        <Route path="entries" element={<EntriesP/>} />
         <Route path="ledger" element={<LedgerP/>} />
         <Route path="gj" element={<GE/>} />
       </Routes>
