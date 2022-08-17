@@ -4,6 +4,7 @@ import NavbarApp from '../components/navbar';
 
 function EntriesP() {
   return (<>
+  
     <NavbarApp/>
     <AddRecords/>
   </>

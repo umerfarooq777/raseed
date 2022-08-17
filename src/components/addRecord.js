@@ -178,10 +178,11 @@ const submitRecords=(e)=>{
     <Container>
       <Row className='debit-form mt-5'>
         <Col>
-        {/* <AddAccount/> */}
+        <AddAccount/>
 
         {/* =================Add Record Form =================== */}
         <Form noValidate validated={validated} onSubmit={handleAddRecord}>
+
         <h2>Add Records</h2>
        
           <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>

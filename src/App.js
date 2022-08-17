@@ -20,10 +20,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<DashboardP/>} />
-        <Route index element={<DashboardP />} />
-        <Route path="entries" element={<EntriesP/>} />
-        <Route path="ledger" element={<LedgerP/>} />
-        <Route path="gj" element={<GE/>} />
+        <Route path="/entries" element={<EntriesP/>} />
+        <Route path="/ledger" element={<LedgerP/>} />
+        <Route path="/gj" element={<GE/>} />
       </Routes>
     </BrowserRouter>
   );

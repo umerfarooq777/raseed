@@ -14,7 +14,7 @@ const NavbarApp=()=> {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container >
-       <Link to="/"><Navbar.Brand href="#" className='' style={{fontSize:35}}>RASEED</Navbar.Brand></Link> 
+       <Navbar.Brand href="#" className='' style={{fontSize:35}}><Link to="/">RASEED</Link> </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -22,10 +22,10 @@ const NavbarApp=()=> {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link to="/"><Nav.Link>Dashboard</Nav.Link></Link>
-            <Link to="entries"><Nav.Link>Add Entries</Nav.Link></Link> 
-            <Link to="ledger"><Nav.Link>Ledger</Nav.Link></Link>
-            <Link to="gj"><Nav.Link>General Journal</Nav.Link></Link>
+            <Nav.Link><Link to="/">Dashboard</Link></Nav.Link>
+            <Nav.Link><Link to="/entries">Add Entries</Link></Nav.Link>
+            <Nav.Link><Link to="/gj">General Journal</Link></Nav.Link>
+            <Nav.Link><Link to="/ledger">Ledger</Link></Nav.Link>
 
 {/* onClick={()=> setActiveNav('#')} className={ activeNav === '#' ? 'active' : ''} active */}
 
@@ -34,14 +34,14 @@ const NavbarApp=()=> {
               <NavDropdown.Item href="#action3">Balance Sheet</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action4">Trail Balance Sheet</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">Cash Flow Statment</NavDropdown.Item>
+              {/* <NavDropdown.Divider /> */}
+              {/* <NavDropdown.Item href="#action5">Cash Flow Statment</NavDropdown.Item> */}
             </NavDropdown>
             {/*<Nav.Link href="#" disabled>
               Link
             </Nav.Link> */}
           </Nav>
-          <Form className="d-flex">
+          {/* <Form className="d-flex">
             <Form.Control
               type="search"
               placeholder="Search"
@@ -49,7 +49,7 @@ const NavbarApp=()=> {
               aria-label="Search"
             />
             <Button variant="outline-success">Search</Button>
-          </Form>
+          </Form> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

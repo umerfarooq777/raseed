@@ -16,7 +16,7 @@ function Ledger() {
 
 
   const getDataFromFirebase = async () => {
-    get(child(dbRef, `record/`))
+    get(child(dbRef, `transactions/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
         //   setFirebaseData(snapshot.val());
