@@ -3,17 +3,23 @@ import Table from "react-bootstrap/Table";
 import { ref, get, child } from "firebase/database";
 import FirebaseStack from "../firebase-config";
 import { Container } from "react-bootstrap";
-import Record from "./record";
 import RecordLedger from "./recordLedger";
+import Loader from "./loader";
 // import TableContent from "react-bootstrap/TableContent";
 
 function Ledger() {
   const [generalRecords, setGeneralRecords] = useState([]);
-  const [stopData, setStopData] = useState(true);
+  const [firebaseData,setFirebaseData] =useState([]);
+  // console.log(firebaseData)
 
+  const [titles, setTitles] = useState()
+  // console.log("🚀 ~ file: ledger.js ~ line 15 ~ Ledger ~ titles", titles)
   const dbRef = ref(FirebaseStack());
 ////=========================================================
 
+useEffect(() => {
+  getDataFromFirebase();
+}, []);
 
   const getDataFromFirebase = async () => {
     get(child(dbRef, `transactions/`))
@@ -21,9 +27,10 @@ function Ledger() {
         if (snapshot.exists()) {
         //   setFirebaseData(snapshot.val());
         //   setStopData(false);
-        setGeneralRecords(snapshot.val())
+        // setGeneralRecords(snapshot.val())
+        setFirebaseData(snapshot.val())
         
-  // console.log(generalRecords[0].debit[0].title+""+generalRecords[0].debit[0].title)
+        // console.log(firebaseData) 
         } else {
           console.log("No data available");
         }
@@ -34,8 +41,30 @@ function Ledger() {
   };
 
   useEffect(() => {
-    getDataFromFirebase();
+    getAccountsFromFirebase();
   }, []);
+  
+    const getAccountsFromFirebase = async () => {
+      get(child(dbRef, `accounts/`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+          //   setFirebaseData(snapshot.val());
+          //   setStopData(false);
+          // setGeneralRecords(snapshot.val())
+          setTitles(snapshot.val())
+          
+          // console.log(firebaseData) 
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error); 
+        });
+    };
+  
+
+
 const loop = generalRecords.length
 
 
@@ -49,62 +78,48 @@ const loop = generalRecords.length
       {/* for(i=0;  i =< generalRecords.length ; i++){
         <p>{i}</p>
       } */}
-    
-    {(() => {
+  
 
-          for (let i = 2017; i < loop ; i++) {
-           console.log(i)
-          }
-
-        })()}
-
-      <h2>---</h2>
+      <h2 className="text-center">LEDGER</h2>
         <Table striped bordered hover variant="dark">
-           <thead>
-            <tr>
-              <th>#</th>
-              <th>Date</th>
-              <th>Description</th>
-              <th>Ref</th>
-              <th>Debit</th>
-              <th>Credit</th>
-              <th>Balance</th>
-            </tr>
-          </thead> 
+            
 
-          <tbody>               
+          {/* <tbody>               
                     <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Loading...</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>                
-            </tbody>
+            </tbody> */}
 
-          <tbody>
-            {generalRecords ? (
-              generalRecords.map((obj, key) => {
+          
+            {titles ? (
+              titles.map((obj, key) => {
+                
+                // console.log("🚀 ~ file: ledger.js ~ line 109 ~ titles.map ~ titles", titles)
+                
+                
+                let account = Object.assign({},titles)
+                
+                
+                
                 return (
                   <>
-                    <RecordLedger index={key+1} debit={obj.debit} credit={obj.credit}/>
+                    <RecordLedger array={firebaseData} keys={key} accounts={account} />
                   </>
                 );
+
               })
             ) : (
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
+            <>
+            <Loader/>
+              </>
             )}
-          </tbody>
+         
         </Table>
         
       </Container>

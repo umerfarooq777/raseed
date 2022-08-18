@@ -1,4 +1,5 @@
 {
+  "accounts":["cash","land","capital","note payable","building","office equipment","account payable"],
   "record": [
     {
       "credit": [
