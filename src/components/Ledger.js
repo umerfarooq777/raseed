@@ -12,6 +12,9 @@ function Ledger() {
   const [firebaseData,setFirebaseData] =useState([]);
   // console.log(firebaseData)
 
+  const [debitBal, setDebitBal] = useState(0)
+  const [creditBal, setCreditBal] = useState(0)
+  const [balance, setBalance] = useState(0)
   const [titles, setTitles] = useState()
   // console.log("🚀 ~ file: ledger.js ~ line 15 ~ Ledger ~ titles", titles)
   const dbRef = ref(FirebaseStack());
@@ -62,11 +65,34 @@ useEffect(() => {
           console.error(error); 
         });
     };
+
+    useEffect(()=>{
+            getTrailBalance()
+        },[titles])
+    
+        const getTrailBalance = () => {
+            // var balance = 0;
+            firebaseData && firebaseData.map((obj) => {
+                if (obj.data.type === 'debit') {
+                  setBalance(balance+(Number(obj.data.amount)))
+                }
+                else if(obj.data.type === 'credit'){
+                  setBalance(balance-(Number(obj.data.amount)))
+                }
+            })
+            setBalance(balance)
+        }
   
 
-
-const loop = generalRecords.length
-
+    // for (let index = 0; index < firebaseData.length; index++) {
+    //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
+      
+    //     if(obj == firebaseData[index].data.title){
+    //       setBalance(balance+Number(firebaseData[index].data.amount))
+    //   }else{
+    //       setBalance(balance-Number(firebaseData[index].data.amount))
+    //   }      
+    // }
 
   // console.log(generalRecords[0].debit)
 
@@ -75,13 +101,12 @@ const loop = generalRecords.length
     <>
       <Container>
     
-      {/* for(i=0;  i =< generalRecords.length ; i++){
-        <p>{i}</p>
-      } */}
+      {
+
+      }
   
 
       <h2 className="text-center">LEDGER</h2>
-        <Table striped bordered hover variant="dark">
             
 
           {/* <tbody>               
@@ -99,9 +124,20 @@ const loop = generalRecords.length
           
             {titles ? (
               titles.map((obj, key) => {
-                
+              // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[0].data.title)
+                // for (let index = 0; index < firebaseData.length; index++) {
+                //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
+                  
+                //     if(obj == firebaseData[index].data.title){
+                //       setBalance(balance+Number(firebaseData[index].data.amount))
+                //   }else{
+                //       setBalance(balance-Number(firebaseData[index].data.amount))
+                //   }
+
+
+                  
+                // }
                 // console.log("🚀 ~ file: ledger.js ~ line 109 ~ titles.map ~ titles", titles)
-                
                 
                 let account = Object.assign({},titles)
                 
@@ -109,7 +145,11 @@ const loop = generalRecords.length
                 
                 return (
                   <>
-                    <RecordLedger array={firebaseData} keys={key} accounts={account} />
+                  <Table striped bordered hover variant="dark" className="table-card">
+                    <RecordLedger array={firebaseData} keys={key} accounts={account} bal={balance}/>
+                  
+         
+                   </Table>
                   </>
                 );
 
@@ -119,8 +159,6 @@ const loop = generalRecords.length
             <Loader/>
               </>
             )}
-         
-        </Table>
         
       </Container>
     </>

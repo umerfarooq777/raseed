@@ -40,9 +40,15 @@ function GeneralRecords() {
   return (
     <>
       <Container>
-      <h2>General Journal</h2>
+      <h2> </h2>
         <Table striped bordered hover variant="dark">
           <thead>
+            <tr>
+              <th colSpan={6}>
+
+            <h4 className="ledger-title capitalize text-center  ">General Journal </h4>
+              </th>
+            </tr>
             <tr>
               <th>#</th>
               <th>Account Name</th>

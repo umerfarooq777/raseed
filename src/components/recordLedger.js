@@ -6,7 +6,7 @@ import { ref, get, child } from "firebase/database";
 
 
 
-const RecordLedger = ({array,keys,accounts}) => {
+const RecordLedger = ({array,keys,accounts,bal}) => {
     
     
 // console.log("🚀 ~ file: recordLedger.js ~ line 10 ~ RecordLedger ~ accounts", accounts,keys)
@@ -15,7 +15,10 @@ const RecordLedger = ({array,keys,accounts}) => {
 
 
     const dbRef = ref(FirebaseStack()); 
-    const [balance, setBalance] = useState(0)
+    const [debitBal, setDebitBal] = useState(0)
+    const [creditBal, setCreditBal] = useState(0)
+    const [balance, setBalance] = useState(bal)
+    // console.log("🚀 ~ file: recordLedger.js ~ line 19 ~ RecordLedger ~ balance", balance)
     const [index, setIndex] = useState(0)
     // console.log("🚀 ~ file: recordLedger.js ~ line 17 ~ RecordLedger ~ index", index)
     // const [keyData, setKeyData] = useState(key)
@@ -51,7 +54,22 @@ const RecordLedger = ({array,keys,accounts}) => {
             });
         };
       
-
+        // useEffect(()=>{
+        //     getTrailBalance()
+        // },[array])
+    
+        // const getTrailBalance = () => {
+        //     var balance = 0;
+        //     array && array.map((obj) => {
+        //         if (obj.data.type === `debit`) {
+        //             balance = (Number(obj.data.amount)+balance)
+        //         }
+        //         else if(obj.data.type === 'credit'){
+        //             balance = (balance-(Number(obj.data.amount)))
+        //         }
+        //     })
+        //     setBalance(balance)
+        // }
     
   const entry = []
 
@@ -70,10 +88,14 @@ const RecordLedger = ({array,keys,accounts}) => {
             // console.log(entry)
            }
 
-            <thead>                
-            <h1 className="ledger-title">{accounts[keys]} </h1>
+            <thead  className="account-card">                
             <tr>
-              <th>#</th>
+              <th colSpan={6}>
+
+            <h4 className="ledger-title capitalize text-center  ">{accounts[keys]} </h4>
+              </th>
+            </tr>
+            <tr>
               <th>Date</th>
               <th>Description/Account</th>
               <th>Ref</th>
@@ -85,50 +107,33 @@ const RecordLedger = ({array,keys,accounts}) => {
 
 
             
-{/* 
-            {
-array ? (
-    array.map((obj, key) => {
-    console.log("line 92 ~ array.map ~ obj", obj[key].data.title)
-      
-        return (
-            <> 
-        </>
-      );
-      
-  })
-  ) : (
-      <>
-  <p>No data mapping</p>
-  
-  </>)
 
-} */}
 
 
 {
-    
-
-
-
-
-
-
-                
-                array ? (
+               array ? (
               array.map((obj, key) => {
+
+
+                               
+                                         
+                // var balance=0;
                   //   console.log("🚀 ~ file: recordLedger.js ~ line 75 ~ array.map ~ obj", obj.data.title)
                   
-                  // console.log(obj.data.title)
+                //   console.log(balance+"oooopppp")
                   return (
                       <> 
-                      {accounts[keys]===obj.data.title?(
+                      
+                      {
+                      
+                      
+                      
+                      accounts[keys]===obj.data.title?(
 
                           <tbody>
                         <tr className=''>
-                        <td></td>
                         <td>DD/MM</td>
-                        <td>{obj.data.title}</td>
+                        <td className="capitalize">{obj.data.title}</td>
                         <td>--</td>
                         <td className={obj.data.type == "debit"? 'debit-text' : 'credit-text'}>{obj.data.type=='debit'?obj.data.amount:null}</td>
                         <td className={obj.data.type == "credit"? 'credit-text' : 'debit-text'}>{obj.data.type=='credit'?obj.data.amount:null}</td>
@@ -137,7 +142,20 @@ array ? (
                         
                     </tbody>
                         )
-                        :("hhhhh")}
+                        :(null
+                    //         <tbody>
+                    //     <tr>
+                    //     <td></td>
+                    //     <td></td>
+                    //     <td></td>
+                    //     <td></td>
+                    //     <td></td>
+                    //     <td></td>
+                    //     <td></td>
+                    //     </tr>
+                        
+                    // </tbody>
+                        )}
                   </>
                 );
                 

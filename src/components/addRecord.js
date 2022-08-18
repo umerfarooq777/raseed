@@ -43,7 +43,7 @@ function AddRecords() {
     const [creditData, setCreditData] = useState([])    
 
     let transactionsLen = datafirebase.length;
-    console.log("🚀 ~ file: addRecord.js ~ line 46 ~ AddRecords ~ transactionsLen", transactionsLen)
+    // console.log("🚀 ~ file: addRecord.js ~ line 46 ~ AddRecords ~ transactionsLen", transactionsLen)
  
     const db = FirebaseStack(); 
   

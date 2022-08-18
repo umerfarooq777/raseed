@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
+import "../App.css"
 const NavbarApp=()=> {
 
   return (
@@ -17,10 +18,10 @@ const NavbarApp=()=> {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link><Link to="/">Dashboard</Link></Nav.Link>
-            <Nav.Link><Link to="/entries">Add Entries</Link></Nav.Link>
-            <Nav.Link><Link to="/gj">General Journal</Link></Nav.Link>
-            <Nav.Link><Link to="/ledger">Ledger</Link></Nav.Link>
+            <Nav.Link><Link to="/"  className='link-anchors'>Dashboard</Link></Nav.Link>
+            <Nav.Link><Link to="/entries"  className='link-anchors'>Add Entries</Link></Nav.Link>
+            <Nav.Link><Link to="/gj"  className='link-anchors'>General Journal</Link></Nav.Link>
+            <Nav.Link><Link to="/ledger"  className='link-anchors'>Ledger</Link></Nav.Link>
 
 {/* onClick={()=> setActiveNav('#')} className={ activeNav === '#' ? 'active' : ''} active */}
 
