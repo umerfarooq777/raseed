@@ -4,12 +4,11 @@ import { ref, get, child } from "firebase/database";
 import FirebaseStack from "../firebase-config";
 import { Container } from "react-bootstrap";
 import Record from "./record";
+import Loader from "./loader";
 // import TableContent from "react-bootstrap/TableContent";
 
 function GeneralRecords() {
   const [generalRecords, setGeneralRecords] = useState([]);
-  const [stopData, setStopData] = useState(true);
-
   const dbRef = ref(FirebaseStack());
 ////=========================================================
 
@@ -39,6 +38,9 @@ function GeneralRecords() {
   ////=========================================================
   return (
     <>
+
+
+
       <Container>
       <h2> </h2>
         <Table striped bordered hover variant="dark">
@@ -81,15 +83,9 @@ function GeneralRecords() {
                 );
               })
             ) : (
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
+              <>
+              <Loader/>
+              </>
             )}
           </tbody>
         </Table>

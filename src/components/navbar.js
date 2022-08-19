@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,7 +9,7 @@ const NavbarApp=()=> {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container >
-       <Navbar.Brand href="#" className='' style={{fontSize:35}}><Link to="/">RASEED</Link> </Navbar.Brand>
+       <Navbar.Brand href="#" className='' style={{fontSize:35}}><Link to="/" className='link-anchors'>RASEED</Link> </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -25,11 +24,11 @@ const NavbarApp=()=> {
 
 {/* onClick={()=> setActiveNav('#')} className={ activeNav === '#' ? 'active' : ''} active */}
 
-            <NavDropdown title="Reports" id="navbarScrollingDropdown">
+            <NavDropdown title="Reports" className='link-anchors' id="navbarScrollingDropdown">
 
-              <NavDropdown.Item href="#action3">Balance Sheet</NavDropdown.Item>
+              <NavDropdown.Item href="#action3"><Link to="/balSheet" className='report-links'>Balance Sheet</Link></NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action4">Trail Balance Sheet</NavDropdown.Item>
+              <NavDropdown.Item href="#action4"><Link to="/balSheet" className='report-links'>Trail Balance Sheet</Link></NavDropdown.Item>
               {/* <NavDropdown.Divider /> */}
               {/* <NavDropdown.Item href="#action5">Cash Flow Statment</NavDropdown.Item> */}
             </NavDropdown>

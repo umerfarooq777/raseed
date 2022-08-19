@@ -1,18 +1,14 @@
 import React from 'react'
-import GeneralRecords from '../components/generalRecords';
 import NavbarApp from '../components/navbar';
 
-function GE() {
+function TrailBal() {
   return (<>
     <div>
       <NavbarApp/>
-
-
-      
-      <GeneralRecords/>
+      <h1>trailBalance</h1>
     </div>
   </>
   );
 }
 
-export default GE;
+export default TrailBal;
