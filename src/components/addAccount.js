@@ -6,33 +6,37 @@ import {ref,set, get, child} from "firebase/database"
 function AddAccount() {
     
     const [accounts, setAccounts] = useState([]);
+    console.log("🚀 ~ file: addAccount.js ~ line 9 ~ AddAccount ~ accounts", accounts)
     
-    const [newAccounts, setNewAccounts] = useState([]);
+    const [newAccounts, setNewAccounts] = useState();
+    // console.log("🚀 ~ file: addAccount.js ~ line 12 ~ AddAccount ~ newAccounts", newAccounts)
     const [validated, setValidated] = useState(false);
 
     const dbRef = ref(FirebaseStack());
     const db = FirebaseStack();
     ///////////////===================================
 
-    const getDataFromFirebase = async () => {
-        get(child(dbRef, `accounts/`))
-          .then((snapshot) => {
-            if (snapshot.exists()) {
+    useEffect(() => {
+      getAccountsFromFirebase();
+    }, []);
+  
+    const getAccountsFromFirebase = async () => {
+      get(child(dbRef, `accounts/`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
             //   setFirebaseData(snapshot.val());
             //   setStopData(false);
-            setNewAccounts(snapshot.val())
-            } else {
-              console.log("No acc available");
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      };
-    
-      useEffect(() => {
-        getDataFromFirebase();
-      }, []);
+            // setGeneralRecords(snapshot.val())
+            setAccounts(snapshot.val());
+            // console.log(firebaseData)
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
 
 
     ////============================================
@@ -68,6 +72,7 @@ function AddAccount() {
   return (
    <>
         <Form noValidate validated={validated} onSubmit={handleAddRecord}>
+          <p>{accounts}          </p>
         <FloatingLabel controlId="floatingInputGrid" label="New Account Name">
           <Form.Control type="text" placeholder="Enter New Account Title" onChange={(e)=>{handelData(e)} } name='account'/>
         </FloatingLabel>
