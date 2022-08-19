@@ -21,19 +21,26 @@ const objData ={
 
 }
 function AddRecords() {
+  
+  const [accounts, setAccounts] = useState([]);
+  // console.log("🚀 ~ file: addRecord.js ~ line 26 ~ AddRecords ~ accounts", accounts)
+  const [submitMode, setSubmitMode] = useState("disabled");
     const [validated, setValidated] = useState(false);
     const [recordsDataObj, setrecordsDataObj]= useState([])
-    // console.log("🚀 ~ file: addRecord.js ~ line 28 ~ AddRecords ~ recordsDataObj", recordsDataObj[1].tilte)
+    // console.log("🚀 ~ file: addRecord.js ~ line 28 ~ AddRecords ~ recordsDataObj", recordsDataObj)
    
    /////===========================================get Database id
     const [generalRecords, setGeneralRecords] = useState([]); 
-    const [stopFeed, setStopFeed] = useState(false);   
     const dbRef = ref(FirebaseStack());
 
     const [datafirebase, setdatafirebase]=useState([])
     // console.log("🚀 ~ file: addRecord.js ~ line 34 ~ AddRecords ~ datafirebase", datafirebase)
     /////===========================================add accounts
-    
+
+const [indexLen, setIndexLen] = useState(0);
+
+    const [debitBal, setDebitBal] = useState(0);
+    const [creditBal, setcreditBal] = useState(0);
 
     const [showA, setShowA] = useState(true);
     const [showB, setShowB] = useState(true);
@@ -41,8 +48,8 @@ function AddRecords() {
     const [data,setData] =useState(objData)
     const [debitData, setDebitData] = useState([])
     const [creditData, setCreditData] = useState([])    
+    const [newTransactions, setNewTransactions] = useState([])    
 
-    let transactionsLen = datafirebase.length;
     // console.log("🚀 ~ file: addRecord.js ~ line 46 ~ AddRecords ~ transactionsLen", transactionsLen)
  
     const db = FirebaseStack(); 
@@ -53,6 +60,7 @@ function AddRecords() {
 /////=========================Get id
 
 useEffect(() => {
+    getAccounts();
     getDataFromFirebase();
     getDataFromFirebaseRecords();
   }, []);
@@ -74,6 +82,22 @@ useEffect(() => {
 //       console.error(error);
 //     });
 // };
+const getAccounts = async () => {
+  get(child(dbRef, `accounts/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        setAccounts(snapshot.val())
+      } else {
+        console.log("No Accounts Available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+
+
 
 const getDataFromFirebase = async () => {
     get(child(dbRef, `transactions/`))
@@ -126,21 +150,64 @@ const handelData =(e)=>{
     setData({...data, [e.target.name]: e.target.value});
 }
 
+
+
+
 const addRecord =(e)=>{
     e.preventDefault();
     
     setrecordsDataObj([...recordsDataObj,data]);
+    // console.log("🚀 ~ file: addRecord.js ~ line 133 ~ addRecord ~ recordsDataObj", recordsDataObj)
+    var credit=0;
+    var debit=0;
+    
+    
     if (data.type === 'debit') {
         setDebitData([...debitData, data])
+        setNewTransactions([...newTransactions, data])        
+        debit = (debitBal+(Number(data.amount)))
+        setDebitBal(debit)
+        setIndexLen(indexLen+1)
     }
     else {
         setCreditData([...creditData, data])
-    }
-
-    set(ref(dbRef, 'transactions/'+transactionsLen), {
-        data
-    });
+        setNewTransactions([...newTransactions, data])
+        credit = (creditBal+(Number(data.amount)))
+        setcreditBal(credit)
+        setIndexLen(indexLen+1)
+    }    
 }
+
+
+const submitTransactions =(e)=>{  
+// newTransactions.map((obj,key)=>{
+
+// set(ref(db,'transactions/'+datafirebase.length ),{   
+//   'data': obj
+// });
+
+
+// })
+  
+}
+
+
+
+
+useEffect(()=>{
+  getSubitMode()
+},[debitBal,creditBal])
+
+const getSubitMode = () => {
+
+      if (debitBal>0 && creditBal>0 && creditBal===debitBal) {
+          setSubmitMode("")
+      }else{
+      setSubmitMode("disabled")
+      }
+  
+}
+
 
 
 const submitRecords=(e)=>{
@@ -155,19 +222,25 @@ const submitRecords=(e)=>{
         // data01.push(`${date} ${time}`)
         data01.push(obj)
         data01.push(obj1)
-
-        var submitableData = recordsDataObj;
         
         set(ref(db,'record/' + generalRecords.length),{   
             'credit': creditData,
             'debit': debitData
         });
+        
         setrecordsDataObj([]);
         setData('')
+
+
 
     }
 
 
+    function refreshPage() {
+      window.location.reload(false);
+    }
+
+console.log(datafirebase.length)
 
 
 
@@ -187,12 +260,15 @@ const submitRecords=(e)=>{
        
           <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>
             <option>Select Account</option>
-            <option value="cash">Cash</option>
-            <option value="capital">Capital</option>
-            <option value="building">Building</option>
-            <option value="officeEquipment">Office Equipment</option>
-            <option value="notesPayable">Notes Payable</option>
-            <option value="accountsPayable">Accounts Payable</option>
+            {
+              accounts && accounts.map((obj,key)=>{
+                return(<>
+                
+                <option value={obj}>{obj}</option>
+                </>)
+
+              })
+            }
           </Form.Select>
         
 
@@ -238,7 +314,7 @@ const submitRecords=(e)=>{
         >
           <Card.Header>Total Credit Amount</Card.Header>
           <Card.Body>
-            <Card.Title>$ 00.00 </Card.Title>
+            <Card.Title>$ {creditBal}</Card.Title>
           </Card.Body>
         </Card>
       ))} 
@@ -254,12 +330,17 @@ const submitRecords=(e)=>{
         >
           <Card.Header>Total Debit Amount</Card.Header>
           <Card.Body>
-            <Card.Title>$ 00.00 </Card.Title>
+            <Card.Title>$ {debitBal}</Card.Title>
           </Card.Body>
         </Card>
       ))}</div>
+          {submitMode==='disabled'?
 
-        <Button variant="success" type="submit" className='mt-3 record-submit' onClick={submitRecords}>Submit Records</Button>
+          <Button variant="success" type="submit" className='mt-3 record-submit' onClick={submitRecords} disabled>Submit Records</Button>
+          :
+
+                  <Button variant="success" type="submit" className='mt-3 record-submit' onClick={(e)=>{submitRecords(e);refreshPage();submitTransactions();}} >Submit Records</Button>
+          }
         </Form>
 
         
@@ -278,7 +359,7 @@ const submitRecords=(e)=>{
                 <Toast show={showA} className={obj.type == "debit"? 'debit Toast' : 'credit Toast'}>        
           <Toast.Header>
             <strong className="me-auto">{obj.title}</strong>
-            <small>{obj.category}{key}</small>
+            <small>{obj.category}</small>
           </Toast.Header>
           <Toast.Body>$ {obj.amount}</Toast.Body>
         </Toast>
