@@ -17,7 +17,8 @@ const objData ={
     title: "",
     amount:"",
     category:"",
-    type:""
+    type:"",
+    date:""
 
 }
 function AddRecords() {
@@ -259,6 +260,9 @@ const submitRecords=(e)=>{
         <Form noValidate validated={validated} onSubmit={handleAddRecord}>
 
         <h2>Add Records</h2>
+        <FloatingLabel controlId="floatingInputGrid" label="Date" className="mb-3">
+          <Form.Control type="date" placeholder="name@example.com" onChange={(e)=>{handelData(e)}} name='date' />
+        </FloatingLabel>
        
           <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>
             <option>Select Account</option>
@@ -283,8 +287,10 @@ const submitRecords=(e)=>{
             <option>Transaction Category</option>
             <option value="asset">Asset</option>
             <option value="liability">Liability</option>
-            <option value="equity">Equity</option>
-            <option value="revenue">Revenue</option>
+            <option value="equity">Equity</option>  
+            <option value="revenue">Revenue</option>  
+            <option value="expense">Expense</option>  
+            <option value="drawing">Drawing</option>  
           </Form.Select>
 
           <Form.Select aria-label="Floating label select example" onChange={(e)=>{handelData(e)}} name='type'>
@@ -361,12 +367,13 @@ const submitRecords=(e)=>{
         recordsDataObj && recordsDataObj.map((obj, key)=>{
             return(
                 <>
-                <Toast show={showA} className={obj.type == "debit"? 'debit Toast' : 'credit Toast'}>        
+                <Toast show={showA} className={obj.type === "debit"? 'debit Toast' : 'credit Toast'}>        
           <Toast.Header>
             <strong className="me-auto">{obj.title}</strong>
             <small>{obj.category}</small>
           </Toast.Header>
-          <Toast.Body>$ {obj.amount}</Toast.Body>
+          <Toast.Body>$ {obj.amount}</Toast.Body> 
+          <small className="ml-5">{obj.date}</small>
         </Toast>
         </>
         )

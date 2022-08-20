@@ -1,12 +1,13 @@
 import React from 'react'
+import BalanceSheet from '../components/balanceSheet';
 import NavbarApp from '../components/navbar';
 
-function BalanceSheet() {
+function BalanceSheetP() {
   return (<>
     <NavbarApp/>
-    <p>Balance Sheet</p>
+    <BalanceSheet/>
   </>
   );
 }
 
-export default BalanceSheet;
+export default BalanceSheetP;

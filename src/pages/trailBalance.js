@@ -1,11 +1,12 @@
 import React from 'react'
 import NavbarApp from '../components/navbar';
+import TrailBalanceSheet from '../components/trail';
 
 function TrailBal() {
   return (<>
     <div>
       <NavbarApp/>
-      <h1>trailBalance</h1>
+      <TrailBalanceSheet/>
     </div>
   </>
   );

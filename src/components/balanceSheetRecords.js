@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import FirebaseStack from "../firebase-config";
 import { ref, get, child } from "firebase/database";
 
-const RecordLedger = ({ array, keys, accounts, bal }) => {
+const BalanceSheetRecords = ({ array, keys, accounts, bal }) => {
 // console.log("🚀 ~ file: recordLedger.js ~ line 8 ~ RecordLedger ~ accounts", accounts)
   // console.log("🚀 ~ file: recordLedger.js ~ line 10 ~ RecordLedger ~ accounts", accounts,keys)
 
@@ -138,23 +138,11 @@ const filtered = filterPlainArray(arrObj, filters);
          
 
 
-
-
-
-
-            // console.log("🚀 ~ file: recordLedger.js ~ line 139 ~ filtered.map ~ obj", obj)
-            // console.log("🚀 ~ file: recordLedger.js ~ line 151 ~ filtered.map ~ filtered", filtered)
-         
-          // var balance=0;
-          //   console.log("🚀 ~ file: recordLedger.js ~ line 75 ~ array.map ~ obj", obj.data.title)
-
-          //   console.log(balance+"oooopppp")
-
           return (
             <>
                   <tbody>
                     <tr className="">
-                      <td>{obj.date}</td>
+                      <td>DD/MM</td>
                       <td className="capitalize">{obj.title}</td>
                       <td>--</td>
                       <td
@@ -176,9 +164,7 @@ const filtered = filterPlainArray(arrObj, filters);
                         {obj.type === "credit" ? obj.amount : null}
                       </td>
                       <td>
-                        {/* {obj.data.type==='debit'?
-                            setBalance(balance+Number(obj.data.amount)):
-                            setBalance(balance-Number(obj.data.amount))} */}
+                       
                        
                       </td>
                     </tr>
@@ -198,7 +184,11 @@ const filtered = filterPlainArray(arrObj, filters);
 
                 <tbody>
                     <tr>
-                      <td colSpan={5}></td> 
+                      <td></td>                      
+                      <td></td>
+                      <td></td>                      
+                      <td></td>
+                      <td></td> 
                       <td className="balanace">
                         {/* {obj.data.type==='debit'?
                             setBalance(balance+Number(obj.data.amount)):
@@ -211,4 +201,4 @@ const filtered = filterPlainArray(arrObj, filters);
   );
 };
 
-export default RecordLedger;
+export default BalanceSheetRecords;
