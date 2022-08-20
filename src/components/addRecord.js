@@ -180,14 +180,16 @@ const addRecord =(e)=>{
 
 
 const submitTransactions =(e)=>{  
-// newTransactions.map((obj,key)=>{
+  e.preventDefault();
+newTransactions.map((obj,key)=>{
+const data=obj
+var index= parseInt(datafirebase.length)+parseInt(key)
+set(ref(db,'transactions/'+index ),{   
+  data
+});
 
-// set(ref(db,'transactions/'+datafirebase.length ),{   
-//   'data': obj
-// });
 
-
-// })
+})
   
 }
 
@@ -240,7 +242,7 @@ const submitRecords=(e)=>{
       window.location.reload(false);
     }
 
-console.log(datafirebase.length)
+// console.log(datafirebase.length)
 
 
 
@@ -264,7 +266,7 @@ console.log(datafirebase.length)
               accounts && accounts.map((obj,key)=>{
                 return(<>
                 
-                <option value={obj}>{obj}</option>
+                <option value={obj} index={key}>{obj}</option>
                 </>)
 
               })
@@ -292,13 +294,13 @@ console.log(datafirebase.length)
           </Form.Select>
         </Col>
 
-        <Button variant="outline-primary" type="submit" className='mt-3 record-submit' onClick={addRecord}>Add Record</Button>
+        <Button variant="outline-primary" type="submit" className='mt-3 record-submit' onClick={addRecord}>Add New Record</Button>
         </Form>
 
 
         
         {/* =================Submit Records Form =================== */}
-        <Form>      
+        <Form noValidate validated={validated} onSubmit={handleAddRecord}>      
 
 
             <div className='record-details'>
@@ -333,13 +335,16 @@ console.log(datafirebase.length)
             <Card.Title>$ {debitBal}</Card.Title>
           </Card.Body>
         </Card>
-      ))}</div>
+      ))}
+      
+      
+      </div>
           {submitMode==='disabled'?
 
-          <Button variant="success" type="submit" className='mt-3 record-submit' onClick={submitRecords} disabled>Submit Records</Button>
+          <Button variant="primary" className='mt-3 record-submit' disabled>Submit Records</Button>
           :
 
-                  <Button variant="success" type="submit" className='mt-3 record-submit' onClick={(e)=>{submitRecords(e);refreshPage();submitTransactions();}} >Submit Records</Button>
+                  <Button variant="primary" className='mt-3 record-submit' onClick={(e)=>{submitRecords(e); refreshPage(); submitTransactions(e);}} >Submit Records</Button>
           }
         </Form>
 
