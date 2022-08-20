@@ -6,7 +6,7 @@
         {
           "amount": "45000",
           "category": "liability",
-          "title": "capital ",
+          "title": "capital",
           "type": "credit"
         }
       ],
@@ -74,7 +74,7 @@
         {
           "amount": "3000",
           "category": "asset",
-          "title": "office equipment ",
+          "title": "office equipment",
           "type": "debit"
         }
       ]
@@ -111,7 +111,7 @@
       "data": {
         "amount": "45000",
         "category": "liability",
-        "title": "capital ",
+        "title": "capital",
         "type": "credit"
       }
     },
@@ -159,7 +159,7 @@
       "data": {
         "amount": "3000",
         "category": "asset",
-        "title": "office equipment ",
+        "title": "office equipment",
         "type": "debit"
       }
     },
