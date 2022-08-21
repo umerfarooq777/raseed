@@ -43,6 +43,7 @@ const [indexLen, setIndexLen] = useState(0);
     const [debitBal, setDebitBal] = useState(0);
     const [creditBal, setcreditBal] = useState(0);
 
+    const [addRec, setAddRec] = useState(false);
     const [showA, setShowA] = useState(true);
     const [showB, setShowB] = useState(true);
 
@@ -88,6 +89,7 @@ const getAccounts = async () => {
     .then((snapshot) => {
       if (snapshot.exists()) {
         setAccounts(snapshot.val())
+        setAddRec(true)
       } else {
         console.log("No Accounts Available");
       }
@@ -215,9 +217,9 @@ const getSubitMode = () => {
 
 const submitRecords=(e)=>{
     // e.preventDefault();
-    var today = new Date();
-    var date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+    // var today = new Date();
+    // var date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+    // var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
         var data01 = []
         const obj = { 'debit': debitData }
@@ -300,7 +302,14 @@ const submitRecords=(e)=>{
           </Form.Select>
         </Col>
 
-        <Button variant="outline-primary" type="submit" className='mt-3 record-submit' onClick={addRecord}>Add New Record</Button>
+       
+        {addRec===true?
+
+        <Button variant="primary" type="submit" className='mt-3 record-submit' onClick={addRecord}>Add New Record</Button>
+        :
+
+        <Button variant="primary" type="submit" className='mt-3 record-submit' disabled>Add New Record</Button>
+        }
         </Form>
 
 
@@ -320,7 +329,7 @@ const submitRecords=(e)=>{
           style={{ width: '18rem' }}
           className="mb-2 mt-3"
         >
-          <Card.Header>Total Credit Amount</Card.Header>
+          {/* <Card.Header>Total Credit Amount</Card.Header> */}
           <Card.Body>
             <Card.Title>$ {creditBal}</Card.Title>
           </Card.Body>
@@ -336,7 +345,7 @@ const submitRecords=(e)=>{
           style={{ width: '18rem' }}
           className="mb-2 mt-3"
         >
-          <Card.Header>Total Debit Amount</Card.Header>
+          {/* <Card.Header>Total Debit Amount</Card.Header> */}
           <Card.Body>
             <Card.Title>$ {debitBal}</Card.Title>
           </Card.Body>
@@ -373,7 +382,7 @@ const submitRecords=(e)=>{
             <small>{obj.category}</small>
           </Toast.Header>
           <Toast.Body>$ {obj.amount}</Toast.Body> 
-          <small className="ml-5">{obj.date}</small>
+          <small className="ml-5 toast-date">{obj.date}</small>
         </Toast>
         </>
         )

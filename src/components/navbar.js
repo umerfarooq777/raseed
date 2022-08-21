@@ -4,19 +4,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
 import "../App.css"
+import Logo from "../images/logo.jfif"
 const NavbarApp=()=> {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container >
-      <Navbar.Brand href="#" className='' style={{fontSize:35}}><Link 
-              to="/" ><img
+      <Navbar.Brand href="#" className='logo-text' style={{fontSize:35}}><img
               alt=""
-              src="https://o.remove.bg/downloads/068c22ea-9b05-4092-98ea-b18f51e53219/imgbin-liberal-contabilidade-do-brasil-ltda-accounting-logo-organization-escrita-ibnHn1BYeBPbDdVqY7m46sNUc-removebg-preview.png"
-              width="100"
+              src={Logo}
+              width="70"
               height="60"
-              className="d-inline-block align-top"
-            /></Link>{' '}<Link to="/" className='link-anchors'>RASEED</Link> </Navbar.Brand>
+              className="d-inline-block align-top logo"
+            />{" "}RASEED</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav

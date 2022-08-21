@@ -8,6 +8,7 @@ function AddAccount() {
     const [accounts, setAccounts] = useState([]);
     // console.log("🚀 ~ file: addAccount.js ~ line 9 ~ AddAccount ~ accounts", accounts.length)
     
+    const [accountMode, setAccountMode] = useState(false);
     const [newAccounts, setNewAccounts] = useState(null);
     // console.log("🚀 ~ file: addAccount.js ~ line 12 ~ AddAccount ~ newAccounts", newAccounts)
     const [validated, setValidated] = useState(false);
@@ -28,6 +29,7 @@ function AddAccount() {
             //   setStopData(false);
             // setGeneralRecords(snapshot.val())
             setAccounts(snapshot.val());
+            setAccountMode(true)
             // console.log(firebaseData)
           } else {
             console.log("No data available");
@@ -77,13 +79,18 @@ function AddAccount() {
   return (
    <>
         <Form noValidate validated={validated} onSubmit={handleAddRecord}>
-          <p>       {JSON.stringify(accounts)} </p>
+          {/* <p>       {JSON.stringify(accounts)} </p> */}
         <FloatingLabel controlId="floatingInputGrid" label="New Account Name">
           <Form.Control type="text" placeholder="Enter New Account Title" onChange={(e)=>{handelData(e)} } name='account'/>
         </FloatingLabel>
+{
+  accountMode===true?
+  
+  <Button variant="primary" className='mt-3 record-submit' onClick={(e)=>{addAccount(e);refreshPage();} } >Add New Account</Button>
+  :
+  <Button variant="primary" className='mt-3 record-submit' disabled>Add New Account</Button>
+}
 
-
-        <Button variant="outline-primary" className='mt-3 record-submit' onClick={(e)=>{addAccount(e);refreshPage();} } >Add New Account</Button>
         </Form>
         </> 
   );

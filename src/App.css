@@ -7,6 +7,12 @@
   /* font-family: 'Poppins', sans-serif!important; */
   font-family: 'Varela Round', sans-serif!important;
 }
+.logo{
+  border-radius: 50%;
+}
+.logo-text{
+  color: #C5F500!important;
+}
 
 .Toast{
 
@@ -28,14 +34,14 @@ margin: 5px 0;
 
 }
 .debit-text{
-  color:  rgb(21, 197, 21)!important;
+  color:  green!important;
 }
 .credit-text{
   color:  rgb(233, 40, 40)!important;
 }
 .credit{
-  border: 1px solid rgb(121, 18, 13)!important;
-  background-color: rgb(121, 18, 13)!important;
+  border: 1px solid rgb(233, 40, 40)!important;
+  background-color: rgb(233, 40, 40)!important;
   color: rgb(255, 255, 255)!important;
   
 
@@ -109,10 +115,14 @@ table{
 }
 
 
+.toast-header .btn-close {
+  display: none;
+}
 
 
-
-
+.toast-date{
+  margin-left: 80% !important; ;
+}
 /* =============================loader */
 
 
