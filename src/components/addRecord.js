@@ -308,7 +308,7 @@ const submitRecords=(e)=>{
         <Button variant="primary" type="submit" className='mt-3 record-submit' onClick={addRecord}>Add New Record</Button>
         :
 
-        <Button variant="primary" type="submit" className='mt-3 record-submit' disabled>Add New Record</Button>
+        <Button variant="primary" type="submit" className='mt-3 record-submit' disabled>Data Loading... </Button>
         }
         </Form>
 
