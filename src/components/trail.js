@@ -10,90 +10,89 @@ import TrailRecord from "./trailRecord";
 
 function TrailBalanceSheet() {
   const [generalRecords, setGeneralRecords] = useState([]);
-  const [firebaseData,setFirebaseData] =useState([]);
+  const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
 
-  const [debitBal, setDebitBal] = useState(0)
-  const [creditBal, setCreditBal] = useState(0)
-  const [balance, setBalance] = useState(0)
-  const [titles, setTitles] = useState()
+  const [debitBal, setDebitBal] = useState(0);
+  const [creditBal, setCreditBal] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [titles, setTitles] = useState();
   // console.log("🚀 ~ file: ledger.js ~ line 15 ~ Ledger ~ titles", titles)
   const dbRef = ref(FirebaseStack());
-////=========================================================
+  ////=========================================================
 
-useEffect(() => {
-  getDataFromFirebase();
-}, []);
+  useEffect(() => {
+    getDataFromFirebase();
+  }, []);
 
   const getDataFromFirebase = async () => {
     get(child(dbRef, `transactions/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-        //   setFirebaseData(snapshot.val());
-        //   setStopData(false);
-        // setGeneralRecords(snapshot.val())
-        setFirebaseData(snapshot.val())
-        
-        // console.log(firebaseData) 
+          //   setFirebaseData(snapshot.val());
+          //   setStopData(false);
+          // setGeneralRecords(snapshot.val())
+          setFirebaseData(snapshot.val());
+
+          // console.log(firebaseData)
         } else {
           console.log("No data available");
         }
       })
       .catch((error) => {
-        console.error(error); 
+        console.error(error);
       });
   };
 
   useEffect(() => {
     getAccountsFromFirebase();
   }, []);
-  
-    const getAccountsFromFirebase = async () => {
-      get(child(dbRef, `accounts/`))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
+
+  const getAccountsFromFirebase = async () => {
+    get(child(dbRef, `accounts/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
           //   setFirebaseData(snapshot.val());
           //   setStopData(false);
           // setGeneralRecords(snapshot.val())
-          setTitles(snapshot.val())
-          
-          // console.log(firebaseData) 
-          } else {
-            console.log("No data available");
-          }
-        })
-        .catch((error) => {
-          console.error(error); 
-        });
-    };
+          setTitles(snapshot.val());
 
-    useEffect(()=>{
-            getTrailBalance()
-        },[titles])
-    
-        const getTrailBalance = () => {
-            // var balance = 0;
-            firebaseData && firebaseData.map((obj) => {
-                if (obj.data.type === 'debit') {
-                  setBalance(balance+(Number(obj.data.amount)))
-                }
-                else if(obj.data.type === 'credit'){
-                  setBalance(balance-(Number(obj.data.amount)))
-                }
-            })
-            setBalance(balance)
+          // console.log(firebaseData)
+        } else {
+          console.log("No data available");
         }
-  
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-    // for (let index = 0; index < firebaseData.length; index++) {
-    //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
-      
-    //     if(obj == firebaseData[index].data.title){
-    //       setBalance(balance+Number(firebaseData[index].data.amount))
-    //   }else{
-    //       setBalance(balance-Number(firebaseData[index].data.amount))
-    //   }      
-    // }
+  useEffect(() => {
+    getTrailBalance();
+  }, [titles]);
+
+  const getTrailBalance = () => {
+    // var balance = 0;
+    firebaseData &&
+      firebaseData.map((obj) => {
+        if (obj.data.type === "debit") {
+          setBalance(balance + Number(obj.data.amount));
+        } else if (obj.data.type === "credit") {
+          setBalance(balance - Number(obj.data.amount));
+        }
+      });
+    setBalance(balance);
+  };
+
+  // for (let index = 0; index < firebaseData.length; index++) {
+  //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
+
+  //     if(obj == firebaseData[index].data.title){
+  //       setBalance(balance+Number(firebaseData[index].data.amount))
+  //   }else{
+  //       setBalance(balance-Number(firebaseData[index].data.amount))
+  //   }
+  // }
 
   // console.log(generalRecords[0].debit)
 
@@ -101,16 +100,41 @@ useEffect(() => {
   return (
     <>
       <Container>
-    
-      {
+        {}
 
-      }
-  
+        <h2 className="text-center">Trail Balance Sheet</h2>
+        <Table striped bordered hover variant="dark">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td colSpan={2}>Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </Table>
 
-      <h2 className="text-center">Trail Balance Sheet</h2>
-            
 
-          {/* <tbody>               
+        {/* <tbody>               
                     <tr>
                         <td></td>
                         <td></td>
@@ -122,23 +146,22 @@ useEffect(() => {
                     </tr>                
             </tbody> */}
 
-          
-            {titles ? (
+        {/* {titles ? (
               titles.map((obj, key) => {
-              // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[0].data.title)
-                // for (let index = 0; index < firebaseData.length; index++) {
-                //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
+              console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[0].data.title)
+                for (let index = 0; index < firebaseData.length; index++) {
+                  console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
                   
-                //     if(obj == firebaseData[index].data.title){
-                //       setBalance(balance+Number(firebaseData[index].data.amount))
-                //   }else{
-                //       setBalance(balance-Number(firebaseData[index].data.amount))
-                //   }
+                    if(obj == firebaseData[index].data.title){
+                      setBalance(balance+Number(firebaseData[index].data.amount))
+                  }else{
+                      setBalance(balance-Number(firebaseData[index].data.amount))
+                  }
 
 
                   
-                // }
-                // console.log("🚀 ~ file: ledger.js ~ line 109 ~ titles.map ~ titles", titles)
+                }
+                console.log("🚀 ~ file: ledger.js ~ line 109 ~ titles.map ~ titles", titles)
                 
                 let account = Object.assign({},titles)
                 
@@ -159,8 +182,7 @@ useEffect(() => {
             <>
             <Loader/>
               </>
-            )}
-        
+            )} */}
       </Container>
     </>
   );
