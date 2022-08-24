@@ -1,0 +1,379 @@
+{
+  "accounts": [
+    "Cash",
+    "Capital",
+    "Land",
+    "Notes Payable",
+    "Building",
+    "Office Equipment",
+    "Account Payable",
+    "Salaries Expense",
+    "Salaries Payable",
+    "Unearned Revenue",
+    "Revenue From Services",
+    "Drawing",
+    "Account Receivable"
+  ],
+  "record": [
+    {
+      "credit": [
+        {
+          "amount": "45000",
+          "category": "equity",
+          "date": "2022-08-25",
+          "title": "Capital",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "45000",
+          "category": "asset",
+          "date": "2022-08-25",
+          "title": "Cash",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "28000",
+          "category": "asset",
+          "date": "2022-08-26",
+          "title": "Cash",
+          "type": "credit"
+        },
+        {
+          "amount": "112000",
+          "category": "liability",
+          "date": "2022-08-26",
+          "title": "Notes Payable",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "140000",
+          "category": "asset",
+          "date": "2022-08-26",
+          "title": "Land",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "4000",
+          "category": "asset",
+          "date": "2022-08-26",
+          "title": "Cash",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "4000",
+          "category": "asset",
+          "date": "2022-08-26",
+          "title": "Building",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "3000",
+          "category": "liability",
+          "date": "2022-08-27",
+          "title": "Account Payable",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "3000",
+          "category": "asset",
+          "date": "2022-08-27",
+          "title": "Office Equipment",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "2000",
+          "category": "asset",
+          "date": "2022-08-30",
+          "title": "Cash",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "2000",
+          "category": "liability",
+          "date": "2022-08-30",
+          "title": "Account Payable",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "2000",
+          "category": "liability",
+          "date": "2022-08-31",
+          "title": "Salaries Payable",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "2000",
+          "category": "expense",
+          "date": "2022-08-31",
+          "title": "Salaries Expense",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "2000",
+          "category": "revenue",
+          "date": "2022-08-31",
+          "title": "Revenue From Services",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "2000",
+          "category": "liability",
+          "date": "2022-08-31",
+          "title": "Unearned Revenue",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "2000",
+          "category": "asset",
+          "date": "2022-08-26",
+          "title": "Cash",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "2000",
+          "category": "drawing",
+          "date": "2022-08-26",
+          "title": "Drawing",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "2000",
+          "category": "revenue",
+          "date": "",
+          "title": "Revenue From Services",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "2000",
+          "category": "asset",
+          "date": "",
+          "title": "Account Receivable",
+          "type": "debit"
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "data": {
+        "amount": "45000",
+        "category": "asset",
+        "date": "2022-08-25",
+        "title": "Cash",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "45000",
+        "category": "equity",
+        "date": "2022-08-25",
+        "title": "Capital",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "140000",
+        "category": "asset",
+        "date": "2022-08-26",
+        "title": "Land",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "28000",
+        "category": "asset",
+        "date": "2022-08-26",
+        "title": "Cash",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "112000",
+        "category": "liability",
+        "date": "2022-08-26",
+        "title": "Notes Payable",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "4000",
+        "category": "asset",
+        "date": "2022-08-26",
+        "title": "Building",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "4000",
+        "category": "asset",
+        "date": "2022-08-26",
+        "title": "Cash",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "3000",
+        "category": "asset",
+        "date": "2022-08-27",
+        "title": "Office Equipment",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "3000",
+        "category": "liability",
+        "date": "2022-08-27",
+        "title": "Account Payable",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "liability",
+        "date": "2022-08-30",
+        "title": "Account Payable",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "asset",
+        "date": "2022-08-30",
+        "title": "Cash",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "expense",
+        "date": "2022-08-31",
+        "title": "Salaries Expense",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "liability",
+        "date": "2022-08-31",
+        "title": "Salaries Payable",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "revenue",
+        "date": "2022-08-31",
+        "title": "Revenue From Services",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "liability",
+        "date": "2022-08-31",
+        "title": "Unearned Revenue",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "drawing",
+        "date": "2022-08-26",
+        "title": "Drawing",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "asset",
+        "date": "2022-08-26",
+        "title": "Cash",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "asset",
+        "date": "",
+        "title": "Account Receivable",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "revenue",
+        "date": "",
+        "title": "Revenue From Services",
+        "type": "credit"
+      }
+    }
+  ]
+}
