@@ -36,7 +36,7 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
       });
   };
   
-  const entry = [];
+  // const entry = [];
 
   var today = new Date();
   var date = `${today.getFullYear()}-${
