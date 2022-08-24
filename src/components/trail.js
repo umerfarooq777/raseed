@@ -14,6 +14,8 @@ function Ledger() {
 
   const [debitBal, setDebitBal] = useState(0)
   const [creditBal, setCreditBal] = useState(0)
+
+  
   const [balance, setBalance] = useState(0)
   const [titles, setTitles] = useState()
   // console.log("🚀 ~ file: ledger.js ~ line 15 ~ Ledger ~ titles", titles)
@@ -83,19 +85,6 @@ useEffect(() => {
             setBalance(balance)
         }
   
-
-    // for (let index = 0; index < firebaseData.length; index++) {
-    //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
-      
-    //     if(obj == firebaseData[index].data.title){
-    //       setBalance(balance+Number(firebaseData[index].data.amount))
-    //   }else{
-    //       setBalance(balance-Number(firebaseData[index].data.amount))
-    //   }      
-    // }
-
-  // console.log(generalRecords[0].debit)
-
   ////=========================================================
   return (
     <>
