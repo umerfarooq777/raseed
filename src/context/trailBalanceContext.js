@@ -1,3 +1,3 @@
 import React, { createContext } from "react";
 
-export const TrailBalanceContext = createContext({});
+export const TrailBalanceContext = createContext(null);

@@ -5,6 +5,7 @@ import FirebaseStack from "../firebase-config";
 import { Container } from "react-bootstrap";
 import RecordLedger from "./trailRecord";
 import Loader from "./loader";
+import { TrailBalanceContext } from "../context/trailBalanceContext";
 // import TableContent from "react-bootstrap/TableContent";
 
 function Ledger() {
@@ -13,10 +14,12 @@ function Ledger() {
   // console.log(firebaseData)
 
   const [debitBal, setDebitBal] = useState(0)
+  // console.log("🚀 ~ file: trail.js ~ line 17 ~ Ledger ~ debitBal", debitBal)
   const [creditBal, setCreditBal] = useState(0)
 
   
   const [balance, setBalance] = useState(0)
+  // console.log("🚀 ~ file: trail.js ~ line 22 ~ Ledger ~ balance", balance)
   const [titles, setTitles] = useState()
   // console.log("🚀 ~ file: ledger.js ~ line 15 ~ Ledger ~ titles", titles)
   const dbRef = ref(FirebaseStack());
@@ -84,17 +87,22 @@ useEffect(() => {
             })
             setBalance(balance)
         }
-  
+
+
+        
+
+
+
   ////=========================================================
   return (
     <>
-      <Container>
+      <Container><TrailBalanceContext.Provider value={{debitBal,setDebitBal,creditBal,setCreditBal}}>
 
                    <Table striped bordered hover variant="dark" className="table-card mt-4">
                         <thead className="account-card">
                         <tr>
                           <th colSpan={7}>
-                            <h4 className="ledger-title capitalize text-center  ">
+                            <h4 className="ledger-title capitalize text-center ">
                               Trail Balance Sheet
                             </h4>
                           </th>
@@ -140,14 +148,19 @@ useEffect(() => {
                       <td></td>
                       <td colSpan={4} className="capitalize"></td> 
                       <td className="balanace">
-                        debit total
+                      {
+                          debitBal
+                        }
                       </td> 
                       <td className="balanace">
-                        credit total
+                        {
+                          creditBal
+                        }
                       </td>
                     </tr>
                   </tbody>  
             </Table>
+            </TrailBalanceContext.Provider>
       </Container>
     </>
   );

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 // import TableContentSub from './TableContentSub'
 
 import FirebaseStack from "../firebase-config";
 import { ref, get, child } from "firebase/database";
+import { TrailBalanceContext } from "../context/trailBalanceContext";
 
 const RecordLedger = ({ array, keys, accounts, bal }) => {
 // console.log("🚀 ~ file: recordLedger.js ~ line 8 ~ RecordLedger ~ accounts", accounts)
@@ -13,6 +14,12 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
   const dbRef = ref(FirebaseStack());
   const [balance, setBalance] = useState(0);
   const [titles, setTitles] = useState();
+
+const {debitBal,setDebitBal,creditBal,setCreditBal} = useContext(TrailBalanceContext) 
+
+
+
+
 
   useEffect(() => {
     getAccountsFromFirebase();
@@ -100,22 +107,26 @@ const filtered = filterPlainArray(arrObj, filters);
       
   }
 
-  const getTrailRes = () => {
-    var balance = 0;
-    filtered && filtered.map((obj) => {
-        if (obj.type === `debit`) {
-            balance = (Number(obj.amount)+balance)
-            setBalance(balance)
-        }
-        else if(obj.type === 'credit'){
-            balance = (balance-(Number(obj.amount)))
-            setBalance(balance)
-        }
-    })
+
+
+//   const getTrailRes = () => {
+//     var balance = 0;
+//     filtered && filtered.map((obj) => {
+//         if (obj.type === `debit`) {
+//             balance = (Number(obj.amount)+balance)
+//             setBalance(balance)
+//             setDebitBal(debitBal+6)
+//         }
+//         else if(obj.type === 'credit'){
+//             balance = (balance-(Number(obj.amount)))
+//             setBalance(balance)
+//             setDebitBal(creditBal-6)
+//         }
+//     })
     
-}
-
-
+// }
+ 
+// getTrailRes();
 
 
 
@@ -139,6 +150,7 @@ const filtered = filterPlainArray(arrObj, filters);
                         {balance>0? "$ "+balance:null}
                       </td> 
                       <td className="balanace">
+                        
                         {balance<0?"$ "+Math.abs(balance):null}
                       </td>
                     </tr>
