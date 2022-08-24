@@ -14,6 +14,7 @@ function Ledger() {
   // console.log(firebaseData)
 
   const [debitBal, setDebitBal] = useState(0)
+  
   // console.log("🚀 ~ file: trail.js ~ line 17 ~ Ledger ~ debitBal", debitBal)
   const [creditBal, setCreditBal] = useState(0)
 

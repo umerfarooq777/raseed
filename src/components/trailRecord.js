@@ -2,7 +2,7 @@ import React, { useEffect, useState,useContext } from "react";
 // import TableContentSub from './TableContentSub'
 
 import FirebaseStack from "../firebase-config";
-import { ref, get, child } from "firebase/database";
+import { ref, get, child, set } from "firebase/database";
 import { TrailBalanceContext } from "../context/trailBalanceContext";
 
 const RecordLedger = ({ array, keys, accounts, bal }) => {
@@ -14,8 +14,17 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
   const dbRef = ref(FirebaseStack());
   const [balance, setBalance] = useState(0);
   const [titles, setTitles] = useState();
+  var arrDr =[];
 
-const {debitBal,setDebitBal,creditBal,setCreditBal} = useContext(TrailBalanceContext) 
+  
+  const [debitDemo, setDebitDemo] = useState(0);
+  // console.log("🚀 ~ file: trailRecord.js ~ line 20 ~ RecordLedger ~ debitDemo", debitDemo)
+
+
+
+const {debitBal,setDebitBal,creditBal,setCreditBal} = useContext(TrailBalanceContext)
+
+
 
 
 
@@ -94,10 +103,13 @@ const filtered = filterPlainArray(arrObj, filters);
 
   const getTrailBalance = () => {
       var balance = 0;
+      var Dr = 0;
+      var Cr = 0;
       filtered && filtered.map((obj) => {
           if (obj.type === `debit`) {
               balance = (Number(obj.amount)+balance)
               setBalance(balance)
+              
           }
           else if(obj.type === 'credit'){
               balance = (balance-(Number(obj.amount)))
@@ -109,24 +121,9 @@ const filtered = filterPlainArray(arrObj, filters);
 
 
 
-//   const getTrailRes = () => {
-//     var balance = 0;
-//     filtered && filtered.map((obj) => {
-//         if (obj.type === `debit`) {
-//             balance = (Number(obj.amount)+balance)
-//             setBalance(balance)
-//             setDebitBal(debitBal+6)
-//         }
-//         else if(obj.type === 'credit'){
-//             balance = (balance-(Number(obj.amount)))
-//             setBalance(balance)
-//             setDebitBal(creditBal-6)
-//         }
-//     })
-    
-// }
- 
-// getTrailRes();
+
+
+
 
 
 
