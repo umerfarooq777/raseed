@@ -4,7 +4,7 @@ import React, { useEffect, useState, useContext } from "react";
 import FirebaseStack from "../firebase-config";
 import { ref, get, child, set } from "firebase/database";
 import { TrailBalanceContext } from "../context/trailBalanceContext";
-import TrailSet from "./trailSet";
+// import TrailSet from "./trailSet";
 
 const balObj = {
   account: "",

@@ -83,13 +83,9 @@ function AddAccount() {
         <FloatingLabel controlId="floatingInputGrid" label="New Account Name">
           <Form.Control type="text" placeholder="Enter New Account Title" onChange={(e)=>{handelData(e)} } name='account'/>
         </FloatingLabel>
-{
-  accountMode===true?
-  
-  <Button variant="primary" className='mt-3 record-submit' onClick={(e)=>{addAccount(e);refreshPage();} } >Add New Account</Button>
-  :
-  <Button variant="primary" className='mt-3 record-submit' disabled>Data Loading... </Button>
-}
+        
+        <Button variant="primary" className='mt-3 record-submit' onClick={(e)=>{addAccount(e);refreshPage();} } >Add New Account</Button>
+
 
         </Form>
         </> 

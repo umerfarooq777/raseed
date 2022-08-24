@@ -6,6 +6,7 @@ import { Container, Col, Row } from "react-bootstrap";
 import RecordLedger from "./recordLedger";
 import Loader from "./loader";
 import BalanceSheetRecords from "./balanceSheetRecords";
+import IncomeSheet from "./income sheet/incomeSheet";
 // import TableContent from "react-bootstrap/TableContent";
 
 function BalanceSheet() {
@@ -103,9 +104,12 @@ function BalanceSheet() {
       <Container>
         {}
 
+   
+        <IncomeSheet/>
+        
+
         <h1 className="text-center">Balance Sheet</h1>
 
-      
 
         <Row>
           <Col md={6}>
@@ -115,6 +119,10 @@ function BalanceSheet() {
 
                 return (
                   <>
+
+
+
+
                     <Table
                       striped
                       bordered

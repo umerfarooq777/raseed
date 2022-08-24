@@ -43,7 +43,7 @@ const [indexLen, setIndexLen] = useState(0);
     const [debitBal, setDebitBal] = useState(0);
     const [creditBal, setcreditBal] = useState(0);
 
-    const [addRec, setAddRec] = useState(false);
+    const [addRec, setAddRec] = useState(0);
     const [showA, setShowA] = useState(true);
     const [showB, setShowB] = useState(true);
 
@@ -89,7 +89,7 @@ const getAccounts = async () => {
     .then((snapshot) => {
       if (snapshot.exists()) {
         setAccounts(snapshot.val())
-        setAddRec(true)
+        setAddRec(1)
       } else {
         console.log("No Accounts Available");
       }
@@ -271,8 +271,8 @@ const submitRecords=(e)=>{
             {
               accounts && accounts.map((obj,key)=>{
                 return(<>
-                
-                <option value={obj} index={key}>{obj}</option>
+                <option value={obj} index={key} className="capitalize">{obj}</option>                
+               
                 </>)
 
               })
@@ -303,13 +303,8 @@ const submitRecords=(e)=>{
         </Col>
 
        
-        {addRec===true?
-
         <Button variant="primary" type="submit" className='mt-3 record-submit' onClick={addRecord}>Add New Record</Button>
-        :
-
-        <Button variant="primary" type="submit" className='mt-3 record-submit' disabled>Data Loading... </Button>
-        }
+        
         </Form>
 
 

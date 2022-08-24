@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 // import TableContentSub from './TableContentSub'
 
-import FirebaseStack from "../firebase-config";
+import FirebaseStack from "../../firebase-config";
 import { ref, get, child } from "firebase/database";
 
-const RecordLedger = ({ array, keys, accounts, bal }) => {
+const RecordLedger1 = ({ array, keys, accounts, bal }) => {
+// console.log("🚀 ~ file: incomeRecord.js ~ line 8 ~ RecordLedger ~ array", array)
 // console.log("🚀 ~ file: recordLedger.js ~ line 8 ~ RecordLedger ~ accounts", accounts)
   // console.log("🚀 ~ file: recordLedger.js ~ line 10 ~ RecordLedger ~ accounts", accounts,keys)
 
@@ -12,6 +13,7 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
 
   const dbRef = ref(FirebaseStack());
   const [balance, setBalance] = useState(0);
+  const [final, setFinal] = useState(0);
   const [titles, setTitles] = useState();
 
   useEffect(() => {
@@ -36,13 +38,12 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
       });
   };
   
-  const entry = [];
 
-  var today = new Date();
-  var date = `${today.getFullYear()}-${
-    today.getMonth() + 1
-  }-${today.getDate()}`;
-  var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+  // var today = new Date();
+  // var date = `${today.getFullYear()}-${
+  //   today.getMonth() + 1
+  // }-${today.getDate()}`;
+  // var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
 
   var arrObj = []
@@ -56,6 +57,9 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
   
   function filterPlainArray(array, filters) {
     const filterKeys = Object.keys(filters);
+    // console.log("🚀 ~ file: incomeRecord.js ~ line 59 ~ filterPlainArray ~ filterKeys", filterKeys)
+
+
     return array.filter((item) => {
         return filterKeys.some((key) => {
             if (!filters[key].length) return true;
@@ -72,35 +76,34 @@ const propertyValues = Array(accounts[keys]);
 
 
 const filters = {
-    title: propertyValues,
+    category: propertyValues,
 };
 
 const filtered = filterPlainArray(arrObj, filters);
-//   console.log("🚀 ~ file: recordLedger.js ~ line 109 ~ RecordLedger ~ filtered", filtered)
+  // console.log("🚀 ~ file: recordLedger.js ~ line 109 ~ RecordLedger ~ filtered", filtered)
 //   console.log("🚀 ~ file: recordLedger.js ~ line 108 ~ RecordLedger ~ filtered", filtered)
 //   console.log("🚀 ~ file: recordLedger.js ~ line 96 ~ RecordLedger ~ array", array)
 
 
   useEffect(()=>{
       getTrailBalance()
+    
   },[filtered])
 
   const getTrailBalance = () => {
       var balance = 0;
       filtered && filtered.map((obj) => {
           if (obj.type === `debit`) {
-              balance = (Number(obj.amount)+balance)
+            balance = (balance+(Number(obj.amount)))
               setBalance(balance)
           }
           else if(obj.type === 'credit'){
-              balance = (balance-(Number(obj.amount)))
+            balance = (Number(obj.amount)+balance)
               setBalance(balance)
           }
       })
       
   }
-
-
 
 
 
@@ -129,7 +132,7 @@ const filtered = filterPlainArray(arrObj, filters);
           <th>Ref</th>
           <th>Debit</th>
           <th>Credit</th>
-          <th>Balance</th>
+          <th>Total</th>
         </tr>
       </thead>
 
@@ -141,7 +144,8 @@ const filtered = filterPlainArray(arrObj, filters);
 
 
 
-
+          
+          // console.log("🚀 ~ file: incomeRecord.js ~ line 193 ~ filtered.map ~ filtered", filtered)
             // console.log("🚀 ~ file: recordLedger.js ~ line 139 ~ filtered.map ~ obj", obj)
             // console.log("🚀 ~ file: recordLedger.js ~ line 151 ~ filtered.map ~ filtered", filtered)
          
@@ -157,23 +161,23 @@ const filtered = filterPlainArray(arrObj, filters);
                       <td>{obj.date}</td>
                       <td className="capitalize">{obj.title}</td>
                       <td>--</td>
+                     
                       <td
                         className={
-                          obj.type === "debit"
+                          obj.type === "credit"
                             ? "debit-text"
                             : "credit-text"
                         }
                       >
-                        {obj.type === "debit" ? obj.amount : null}
-                      </td>
-                      <td
+                        {obj.type === "credit" ? obj.amount : null}
+                      </td> <td
                         className={
-                          obj.type === "credit"
+                          obj.type === "debit"
                             ? "credit-text"
                             : "debit-text"
                         }
                       >
-                        {obj.type === "credit" ? obj.amount : null}
+                        {obj.type === "debit" ? obj.amount : null}
                       </td>
                       <td>
                         {/* {obj.data.type==='debit'?
@@ -211,4 +215,4 @@ const filtered = filterPlainArray(arrObj, filters);
   );
 };
 
-export default RecordLedger;
+export default RecordLedger1;
