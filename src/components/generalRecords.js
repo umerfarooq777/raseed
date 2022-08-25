@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
+import {Table,Row} from "react-bootstrap";
 import { ref, get, child } from "firebase/database";
 import FirebaseStack from "../firebase-config";
 import { Container } from "react-bootstrap";
@@ -43,6 +43,12 @@ function GeneralRecords() {
 
       <Container>
       <h2> </h2>
+
+
+{generalRecords && generalRecords?
+
+
+
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
@@ -61,18 +67,6 @@ function GeneralRecords() {
             </tr>
           </thead>
 
-          {/* <tbody>               
-                    <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>                
-            </tbody> */}
-
           <tbody>
             {generalRecords ? (
               generalRecords.map((obj, key) => {
@@ -82,13 +76,20 @@ function GeneralRecords() {
                   </>
                 );
               })
-            ) : (
-              <>
-              <Loader/>
-              </>
+              ) : (
+              null
             )}
-          </tbody>
+          </tbody> 
         </Table>
+        :
+        
+        <>
+        <Row>
+        <Loader/>
+        </Row>
+        </>
+        
+        }
         
       </Container>
     </>

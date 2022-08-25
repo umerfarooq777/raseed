@@ -33,12 +33,6 @@ const RecordLedger = ({ array, keys, accounts }) => {
   // console.log("🚀 ~ file: trailRecord.js ~ line 20 ~ RecordLedger ~ debitDemo", debitDemo)
 
   const {
-    debitBal,
-    setDebitBal,
-    creditBal,
-    setCreditBal,
-    balances,
-    setBalances,
     DrArray,
     setDrArray,
     CrArray,
@@ -171,7 +165,7 @@ const RecordLedger = ({ array, keys, accounts }) => {
       {balance === 0 ? null : (
         <tbody>
           <tr>
-            <td></td>
+            <td>{keys+1}</td>
             <td colSpan={4} className="capitalize">
               {accounts[keys]}
             </td>

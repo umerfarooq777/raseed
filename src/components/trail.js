@@ -13,39 +13,28 @@ function TrailBalanceSheet() {
   const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
 
-
   const [balances, setBalances] = useState([]);
   // console.log("🚀 ~ file: trail.js ~ line 18 ~ TrailBalanceSheet ~ balances", balances)
-
 
   const [debitBal, setDebitBal] = useState("");
   const [creditBal, setCreditBal] = useState("");
 
+  const [mode, setMode] = useState(true);
 
-  const [mode, setMode] = useState(false);
-
-  
   const [DrArray, setDrArray] = useState([]);
-  let DrArrayFiltered = DrArray.filter( (ele, ind) => ind === DrArray.findIndex( elem => elem.acc === ele.acc && elem.bal === ele.bal))
+  let DrArrayFiltered = DrArray.filter(
+    (ele, ind) =>
+      ind ===
+      DrArray.findIndex((elem) => elem.acc === ele.acc && elem.bal === ele.bal)
+  );
   //console.log("🚀 ~ file: trail.js ~ line 27 ~ TrailBalanceSheet ~ DrArrayFiltered", DrArrayFiltered)
-  
-  
-
-
-
-
-
-
 
   const [CrArray, setCrArray] = useState([]);
- let CrArrayFiltered = CrArray.filter( (ele, ind) => ind === CrArray.findIndex( elem => elem.acc === ele.acc && elem.bal === ele.bal))
-
-
-
-
-
-
-
+  let CrArrayFiltered = CrArray.filter(
+    (ele, ind) =>
+      ind ===
+      CrArray.findIndex((elem) => elem.acc === ele.acc && elem.bal === ele.bal)
+  );
 
   const [balance, setBalance] = useState(0);
   // console.log("🚀 ~ file: trail.js ~ line 22 ~ Ledger ~ balance", balance)
@@ -119,55 +108,29 @@ function TrailBalanceSheet() {
     setBalance(balance);
   };
 
-
   useEffect(() => {
     getTotal();
   }, []);
 
-  const getTotal = () => {
+  const getTotal = () => {};
+
+  
+
+  var countDr = DrArrayFiltered.reduce((accumulator, object) => {
+    return accumulator + object.bal;
+  }, 0);
 
 
-    
-    
-    let countDr=0;
-    let countCr=0;
-    
-    if(DrArrayFiltered){
-      for (let index = 0; index < DrArrayFiltered.length; index++) {
-        countDr=countDr+DrArrayFiltered[index].bal        
-      }
-      setDebitBal(countDr) 
-      setMode(true)
-      console.log("🚀", countDr)
-
-    } 
-    else{
-      console.log("no data");
-    }
-    
-    
-    if(CrArrayFiltered){
-        for (let index = 0; index < CrArrayFiltered.length; index++) {
-          countCr=countCr+CrArrayFiltered[index].bal        
-        }
-        setCreditBal(countCr)
-        setMode(true) 
-        console.log("🚀", countCr)
-      }
-      else{
-        console.log("no data");
-      }
-      
-    };
-// setDebitBal(countDr)
-// setCreditBal(countCr)   
+  var countCr = CrArrayFiltered.reduce((accumulator, object) => {
+    return accumulator + object.bal;
+  }, 0);
 
   ////=========================================================
   return (
     <>
       <Container>
         <TrailBalanceContext.Provider
-          value={{DrArray,setDrArray,CrArray,setCrArray }}
+          value={{ DrArray, setDrArray, CrArray, setCrArray }}
         >
           <Table
             striped
@@ -213,25 +176,30 @@ function TrailBalanceSheet() {
                 <Loader />
               </>
             )}
-{
-  mode===true? 
-  
-  
+
             <tbody>
               <tr>
                 <td></td>
-                <td colSpan={4} className="capitalize"></td>
-                <td className="balanace">{debitBal>0? debitBal:"--"}</td>
-                <td className="balanace">{creditBal>0? creditBal :"--"}</td>
+                <td colSpan={4} className="capitalize">-------------total</td>
+                <td className="balanace">{mode === true ? countDr : null}</td>
+                <td className="balanace">{mode === true ? countCr : null}</td>
               </tr>
-               
+
               <tr>
-                <td colSpan={7} className="capitalize text-center">{debitBal===creditBal?"BALANCED":"UNBALANCED"}</td>
+                <td
+                  colSpan={7}
+                  className={
+                    countDr === countCr && countCr <= 0 && countDr <= 0
+                      ? "credit-text capitalize text-center"
+                      : "debit-text capitalize text-center"  
+                  }
+                >
+                  {countDr === countCr && countCr <= 0 && countDr <= 0
+                    ? "UNBALANCED"
+                    :"BALANCED" }
+                </td>
               </tr>
             </tbody>
-  :
-  <p>{mode}</p>
-}
           </Table>
         </TrailBalanceContext.Provider>
       </Container>
