@@ -23,6 +23,10 @@ const RecordLedger = ({ array, keys, accounts }) => {
   const dbRef = ref(FirebaseStack());
   const [balance, setBalance] = useState(0);
   const [titles, setTitles] = useState();
+  // console.log("🚀 ~ file: trailRecord.js ~ line 26 ~ RecordLedger ~ titles", titles)
+  const [data, setData] = useState([]);
+  // console.log("🚀 ~ file: trailRecord.js ~ line 27 ~ RecordLedger ~ data", data)
+  
   var arrDr = [];
 
   const [debitDemo, setDebitDemo] = useState(0);
@@ -35,11 +39,12 @@ const RecordLedger = ({ array, keys, accounts }) => {
     setCreditBal,
     balances,
     setBalances,
+    DrArray,
+    setDrArray,
+    CrArray,
+    setCrArray,
   } = useContext(TrailBalanceContext);
-    // console.log("🚀 ~ file: trailRecord.js ~ line 39 ~ RecordLedger ~ balances", balances)
-
-
-  
+  // console.log("🚀 ~ file: trailRecord.js ~ line 39 ~ RecordLedger ~ balances", balances)
 
   useEffect(() => {
     getAccountsFromFirebase();
@@ -100,6 +105,8 @@ const RecordLedger = ({ array, keys, accounts }) => {
   };
 
   const filtered = filterPlainArray(arrObj, filters);
+
+  // setData(filtered)
   //   console.log("🚀 ~ file: recordLedger.js ~ line 109 ~ RecordLedger ~ filtered", filtered)
   //   console.log("🚀 ~ file: recordLedger.js ~ line 108 ~ RecordLedger ~ filtered", filtered)
   //   console.log("🚀 ~ file: recordLedger.js ~ line 96 ~ RecordLedger ~ array", array)
@@ -109,23 +116,56 @@ const RecordLedger = ({ array, keys, accounts }) => {
   }, [filtered]);
 
   const getTrailBalance = () => {
-    var balance = 0;
+    var bal = 0;
     var Dr = 0;
     var Cr = 0;
     filtered &&
       filtered.map((obj) => {
         if (obj.type === `debit`) {
-          balance = Number(obj.amount) + balance;
-          setBalance(balance);
+          bal = Number(obj.amount) + bal;
+          setBalance(bal);
         } else if (obj.type === "credit") {
-          balance = balance - Number(obj.amount);
-          setBalance(balance);
+          bal = bal - Number(obj.amount);
+          setBalance(bal);
         }
       });
+    // if (balance>0) {
+    //   setDebitBal(current=>current+balance)
+    // } else if (balance<0) {
+    //   setCreditBal(current=>current+balance)
+    // }
   };
 
   const loop = array.length;
 
+  useEffect(() => {
+  }, [filtered]);
+  
+  const getTotal = () => {
+    // var balance = 0;
+    var Dr = 0;
+    var Cr = 0;
+
+    filtered &&
+      filtered.map((obj) => {
+        if (balance > 0) {
+          Dr = Dr + balance;
+          DrArray.push({acc:obj.title,bal:balance})
+          // console.log("🚀 ~ file: trailRecord.js ~ line 154 ~ filtered.map ~ DrArray", DrArray)
+          // setDebitBal(balance)
+          // setBalance(0)
+          // console.log(Dr, Cr, balance);
+        } else if (balance < 0) {
+          Cr = Cr + balance;
+          CrArray.push({acc:obj.title,bal:Math.abs(balance)})
+          // console.log("🚀 ~ file: trailRecord.js ~ line 161 ~ filtered.map ~ CrArray", CrArray)
+          // setCreditBal(balance)
+          // console.log(Dr, Cr, balance);
+        }
+      });
+    };
+    
+    getTotal();
   return (
     <>
       {balance === 0 ? null : (
@@ -135,8 +175,10 @@ const RecordLedger = ({ array, keys, accounts }) => {
             <td colSpan={4} className="capitalize">
               {accounts[keys]}
             </td>
-            <td className="balanace">{balance > 0 ? "$ " + balance : null}</td>
-            <td className="balanace">
+            <td className={balance > 0 ? "debit-text" : "credit-text"}>
+              {balance > 0 ? "$ " + balance : null}
+            </td>
+            <td className={balance < 0 ? "credit-text" : "debit-text"}>
               {balance < 0 ? "$ " + Math.abs(balance) : null}
             </td>
           </tr>

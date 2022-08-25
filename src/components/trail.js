@@ -18,10 +18,34 @@ function TrailBalanceSheet() {
   // console.log("🚀 ~ file: trail.js ~ line 18 ~ TrailBalanceSheet ~ balances", balances)
 
 
-  const [debitBal, setDebitBal] = useState(0);
+  const [debitBal, setDebitBal] = useState("");
+  const [creditBal, setCreditBal] = useState("");
 
-  // console.log("🚀 ~ file: trail.js ~ line 17 ~ Ledger ~ debitBal", debitBal)
-  const [creditBal, setCreditBal] = useState(0);
+
+  const [mode, setMode] = useState(false);
+
+  
+  const [DrArray, setDrArray] = useState([]);
+  let DrArrayFiltered = DrArray.filter( (ele, ind) => ind === DrArray.findIndex( elem => elem.acc === ele.acc && elem.bal === ele.bal))
+  //console.log("🚀 ~ file: trail.js ~ line 27 ~ TrailBalanceSheet ~ DrArrayFiltered", DrArrayFiltered)
+  
+  
+
+
+
+
+
+
+
+  const [CrArray, setCrArray] = useState([]);
+ let CrArrayFiltered = CrArray.filter( (ele, ind) => ind === CrArray.findIndex( elem => elem.acc === ele.acc && elem.bal === ele.bal))
+
+
+
+
+
+
+
 
   const [balance, setBalance] = useState(0);
   // console.log("🚀 ~ file: trail.js ~ line 22 ~ Ledger ~ balance", balance)
@@ -78,6 +102,7 @@ function TrailBalanceSheet() {
 
   useEffect(() => {
     getTrailBalance();
+    getTotal();
   }, [titles]);
 
   const getTrailBalance = () => {
@@ -94,12 +119,55 @@ function TrailBalanceSheet() {
     setBalance(balance);
   };
 
+
+  useEffect(() => {
+    getTotal();
+  }, []);
+
+  const getTotal = () => {
+
+
+    
+    
+    let countDr=0;
+    let countCr=0;
+    
+    if(DrArrayFiltered){
+      for (let index = 0; index < DrArrayFiltered.length; index++) {
+        countDr=countDr+DrArrayFiltered[index].bal        
+      }
+      setDebitBal(countDr) 
+      setMode(true)
+      console.log("🚀", countDr)
+
+    } 
+    else{
+      console.log("no data");
+    }
+    
+    
+    if(CrArrayFiltered){
+        for (let index = 0; index < CrArrayFiltered.length; index++) {
+          countCr=countCr+CrArrayFiltered[index].bal        
+        }
+        setCreditBal(countCr)
+        setMode(true) 
+        console.log("🚀", countCr)
+      }
+      else{
+        console.log("no data");
+      }
+      
+    };
+// setDebitBal(countDr)
+// setCreditBal(countCr)   
+
   ////=========================================================
   return (
     <>
       <Container>
         <TrailBalanceContext.Provider
-          value={{ debitBal, setDebitBal, creditBal, setCreditBal,balances,setBalances }}
+          value={{DrArray,setDrArray,CrArray,setCrArray }}
         >
           <Table
             striped
@@ -118,7 +186,7 @@ function TrailBalanceSheet() {
               </tr>
 
               <tr>
-                <th>Date</th>
+                <th>#</th>
                 <th colSpan={4}>Description/Account</th>
                 <th>Debit</th>
                 <th>Credit</th>
@@ -145,15 +213,25 @@ function TrailBalanceSheet() {
                 <Loader />
               </>
             )}
-
+{
+  mode===true? 
+  
+  
             <tbody>
               <tr>
                 <td></td>
                 <td colSpan={4} className="capitalize"></td>
-                <td className="balanace">{debitBal}</td>
-                <td className="balanace">{creditBal}</td>
+                <td className="balanace">{debitBal>0? debitBal:"--"}</td>
+                <td className="balanace">{creditBal>0? creditBal :"--"}</td>
+              </tr>
+               
+              <tr>
+                <td colSpan={7} className="capitalize text-center">{debitBal===creditBal?"BALANCED":"UNBALANCED"}</td>
               </tr>
             </tbody>
+  :
+  <p>{mode}</p>
+}
           </Table>
         </TrailBalanceContext.Provider>
       </Container>

@@ -118,7 +118,7 @@ const filtered = filterPlainArray(arrObj, filters);
         // console.log(entry)
       }
 
-      <thead className="account-card">
+      {/* <thead className="account-card">
         <tr>
           <th colSpan={6}>
             <h4 className="ledger-title capitalize text-center  ">
@@ -134,7 +134,7 @@ const filtered = filterPlainArray(arrObj, filters);
           <th>Credit</th>
           <th>Total</th>
         </tr>
-      </thead>
+      </thead> */}
 
       {filtered ? (
         filtered.map((obj, key) => {
@@ -161,23 +161,23 @@ const filtered = filterPlainArray(arrObj, filters);
                       <td>{obj.date}</td>
                       <td className="capitalize">{obj.title}</td>
                       <td>--</td>
-                     
                       <td
                         className={
-                          obj.type === "credit"
+                          obj.type === "debit"
                             ? "debit-text"
                             : "credit-text"
                         }
                       >
-                        {obj.type === "credit" ? obj.amount : null}
-                      </td> <td
+                        {obj.type === "debit" ? obj.amount : null}
+                      </td>
+                      <td
                         className={
-                          obj.type === "debit"
+                          obj.type === "credit"
                             ? "credit-text"
                             : "debit-text"
                         }
                       >
-                        {obj.type === "debit" ? obj.amount : null}
+                        {obj.type === "credit" ? obj.amount : null}
                       </td>
                       <td>
                         {/* {obj.data.type==='debit'?
