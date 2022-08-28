@@ -145,14 +145,14 @@ var arrAcc = accounts[keys];
                   <td>--</td>
                   <td
                     className={
-                      obj.type === "debit" ? "debit-text" : "credit-text"
+                      obj.type === "debit" ? "credit-text" : "debit-text"
                     }
                   >
                     {obj.type === "debit" ? obj.amount : null}
                   </td>
                   <td
                     className={
-                      obj.type === "credit" ? "credit-text" : "debit-text"
+                      obj.type === "credit" ? "debit-text" : "credit-text"
                     }
                   >
                     {obj.type === "credit" ? obj.amount : null}

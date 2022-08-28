@@ -195,8 +195,8 @@ const filtered = filterPlainArray(arrObj, filters);
 
                     <tr >
                       <td colSpan={3} className="capitalize">{accounts[keys]}</td> 
-                      <td className={balance < 0 ? "credit-text" : "debit-text"}>{balance>0?balance:null}</td>
                       <td className={balance < 0 ? "credit-text" : "debit-text"}>{balance<0?balance:null}</td>
+                      <td className={balance < 0 ? "credit-text" : "debit-text"}>{balance>0?balance:null}</td> 
                       <td className="balanace">
                       </td>
                     </tr>

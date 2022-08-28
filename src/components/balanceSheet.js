@@ -69,22 +69,22 @@ function BalanceSheet() {
   //       });
   //   };
 
-  useEffect(() => {
-    getTrailBalance();
-  }, [titles]);
+  // useEffect(() => {
+  //   getTrailBalance();
+  // }, [titles]);
 
-  const getTrailBalance = () => {
-    // var balance = 0;
-    firebaseData &&
-      firebaseData.map((obj) => {
-        if (obj.data.type === "debit") {
-          setBalance(balance + Number(obj.data.amount));
-        } else if (obj.data.type === "credit") {
-          setBalance(balance - Number(obj.data.amount));
-        }
-      });
-    setBalance(balance);
-  };
+  // const getTrailBalance = () => {
+  //   // var balance = 0;
+  //   firebaseData &&
+  //     firebaseData.map((obj) => {
+  //       if (obj.data.type === "debit") {
+  //         setBalance(balance + Number(obj.data.amount));
+  //       } else if (obj.data.type === "credit") {
+  //         setBalance(balance - Number(obj.data.amount));
+  //       }
+  //     });
+  //   setBalance(balance);
+  // };
 
   // for (let index = 0; index < firebaseData.length; index++) {
   //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
@@ -107,7 +107,7 @@ function BalanceSheet() {
    
         <IncomeSheet/>
         
-
+ 
         <h1 className="text-center">Balance Sheet</h1>
 
 
