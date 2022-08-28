@@ -17,9 +17,9 @@ function BalanceSheet() {
   const [debitBal, setDebitBal] = useState(0);
   const [creditBal, setCreditBal] = useState(0);
   const [balance, setBalance] = useState(0);
-  const [titles, setTitles] = useState(["Assets"]);
-  const [titles1, setTitles1] = useState(["Liabilities", "Equity"]);
+  const [titles, setTitles] = useState([]);
   // console.log("🚀 ~ file: ledger.js ~ line 15 ~ Ledger ~ titles", titles)
+  const [titles1, setTitles1] = useState(["liability", "equity"]);
   const dbRef = ref(FirebaseStack());
   ////=========================================================
 
@@ -46,45 +46,83 @@ function BalanceSheet() {
       });
   };
 
-  // useEffect(() => {
-  //   getAccountsFromFirebase();
-  // }, []);
+  useEffect(() => {
+    getAccountsFromFirebase();
+  }, []);
 
-  //   const getAccountsFromFirebase = async () => {
-  //     get(child(dbRef, `accounts/`))
-  //       .then((snapshot) => {
-  //         if (snapshot.exists()) {
-  //         //   setFirebaseData(snapshot.val());
-  //         //   setStopData(false);
-  //         // setGeneralRecords(snapshot.val())
-  //         setTitles(snapshot.val())
+    const getAccountsFromFirebase = async () => {
+      get(child(dbRef, `accounts/`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+          //   setFirebaseData(snapshot.val());
+          //   setStopData(false);
+          // setGeneralRecords(snapshot.val())
+          setTitles(snapshot.val())
 
-  //         // console.log(firebaseData)
-  //         } else {
-  //           console.log("No data available");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   };
+          // console.log(firebaseData)
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+//================================================
 
-  // useEffect(() => {
-  //   getTrailBalance();
-  // }, [titles]);
 
-  // const getTrailBalance = () => {
-  //   // var balance = 0;
-  //   firebaseData &&
-  //     firebaseData.map((obj) => {
-  //       if (obj.data.type === "debit") {
-  //         setBalance(balance + Number(obj.data.amount));
-  //       } else if (obj.data.type === "credit") {
-  //         setBalance(balance - Number(obj.data.amount));
-  //       }
-  //     });
-  //   setBalance(balance);
-  // };
+
+
+var arrObj = []
+firebaseData && firebaseData.map((obj)=>{
+  arrObj.push(obj.data)
+})
+
+
+const getValue = (value) =>
+typeof value === "string" ? value.toUpperCase() : value;
+
+function filterPlainArray(array, filters) {
+  const filterKeys = Object.keys(filters);
+  return array.filter((item) => {
+      return filterKeys.some((key) => {
+          if (!filters[key].length) return true;
+      return filters[key].find(
+        (filter) => getValue(filter) === getValue(item[key])
+      );
+    });
+  });
+}
+
+
+// const propertyCategory = Array(["asset"]);
+const propertyValues = Array("asset");
+// console.log("🚀 ~ file: recordLedger.js ~ line 101 ~ RecordLedger ~ propertyValues", propertyValues)
+
+
+const filters = {    
+category: propertyValues,
+  // category:propertyCategory,
+};
+
+const filtered = filterPlainArray(arrObj, filters);
+    // console.log("🚀 ~ file: balanceSheet.js ~ line 109 ~ BalanceSheet ~ filtered", filtered)
+    // useEffect(() => {
+    //   getTrailBalance();
+    // }, [titles]);
+
+    // const getTrailBalance = () => {
+    //   // var balance = 0;
+    //   firebaseData &&
+    //     firebaseData.map((obj) => {
+    //       if (obj.data.type === "debit") {
+    //         setBalance(balance + Number(obj.data.amount));
+    //       } else if (obj.data.type === "credit") {
+    //         setBalance(balance - Number(obj.data.amount));
+    //       }
+    //     });
+    //   setBalance(balance);
+    // };
 
   // for (let index = 0; index < firebaseData.length; index++) {
   //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
@@ -113,30 +151,49 @@ function BalanceSheet() {
 
         <Row>
           <Col md={6}>
-            {titles ? (
-              titles.map((obj, key) => {
-                let account = Object.assign({}, titles);
-
-                return (
-                  <>
-
-
-
-
                     <Table
                       striped
                       bordered
                       hover
                       variant="dark"
                       className="table-card"
-                    >
+                    ><thead className="account-card">
+                    <tr>
+                      <th colSpan={7}>
+                        <h4 className="ledger-title capitalize text-center  ">
+                         Assets
+                        </h4>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th colSpan={5}>Description/Account</th>
+                      <th></th>
+                      <th>Total Balance</th>
+                    </tr>
+                  </thead> 
+            {filtered ? (
+              filtered.map((obj, key) => {
+                // console.log("🚀 ~ file: balanceSheet.js ~ line 176 ~ filtered.map ~ obj", obj)
+                let account = Object.assign({}, titles);
+// console.log("🚀 ~ file: balanceSheet.js ~ line 198 ~ filtered.map ~ filtered", filtered)
+                // console.log("🚀 ~ file: balanceSheet.js ~ line 119 ~ titles.map ~ titles", titles)
+                // console.log("🚀 ~ file: balanceSheet.js ~ line 119 ~ titles.map ~ account", account)
+
+                return (
+                  <>
+
+
+              
+
+
+
+
                       <BalanceSheetRecords
-                        array={firebaseData}
+                        array={filtered}
                         keys={key}
                         accounts={account}
                         bal={balance}
                       />
-                    </Table>
                   </>
                 );
               })
@@ -145,10 +202,11 @@ function BalanceSheet() {
                 <Loader />
               </>
             )}
+                    </Table>
           </Col>
 
           <Col md={6}>
-            {titles1 ? (
+            {/* {titles1 ? (
               titles1.map((obj, key) => {
                 let account = Object.assign({}, titles1);
 
@@ -175,7 +233,7 @@ function BalanceSheet() {
               <>
                 <Loader />
               </>
-            )}
+            )} */}
           </Col>
         </Row>
       </Container>

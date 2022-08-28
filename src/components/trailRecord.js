@@ -6,10 +6,6 @@ import { ref, get, child, set } from "firebase/database";
 import { TrailBalanceContext } from "../context/trailBalanceContext";
 // import TrailSet from "./trailSet";
 
-const balObj = {
-  account: "",
-  bal: "",
-};
 
 const RecordLedger = ({ array, keys, accounts }) => {
   // console.log("🚀 ~ file: trailRecord.js ~ line 10 ~ RecordLedger ~ array", array)

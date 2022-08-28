@@ -47,7 +47,7 @@ const BalanceSheetRecords = ({ array, keys, accounts, bal }) => {
 
   var arrObj = []
   array && array.map((obj)=>{
-    arrObj.push(obj.data)
+    arrObj.push(obj)
   })
 
 
@@ -67,12 +67,14 @@ const BalanceSheetRecords = ({ array, keys, accounts, bal }) => {
 }
 
 
+// const propertyCategory = Array(["asset"]);
 const propertyValues = Array(accounts[keys]);
 // console.log("🚀 ~ file: recordLedger.js ~ line 101 ~ RecordLedger ~ propertyValues", propertyValues)
 
 
-const filters = {
-    title: propertyValues,
+const filters = {    
+title: propertyValues,
+    // category:propertyCategory,
 };
 
 const filtered = filterPlainArray(arrObj, filters);
@@ -102,20 +104,13 @@ const filtered = filterPlainArray(arrObj, filters);
 
 
 
-
-
-
-
-
-
-
   return (
     <>
       {
         // console.log(entry)
       }
 
-      <thead className="account-card">
+      {/* <thead className="account-card">
         <tr>
           <th colSpan={6}>
             <h4 className="ledger-title capitalize text-center  ">
@@ -131,18 +126,23 @@ const filtered = filterPlainArray(arrObj, filters);
           <th>Credit</th>
           <th>Balance</th>
         </tr>
-      </thead>
+      </thead> */}
 
       {filtered ? (
         filtered.map((obj, key) => {
          
+          // console.log("🚀 ~ file: balanceSheetRecords.js ~ line 175 ~ filtered.map ~ filtered", balance,keys)
 
 
           return (
             <>
-                  <tbody>
+
+           
+                  {/* <tbody>
+
+           
                     <tr className="">
-                      <td>DD/MM</td>
+                      <td></td>
                       <td className="capitalize">{obj.title}</td>
                       <td>--</td>
                       <td
@@ -168,7 +168,7 @@ const filtered = filterPlainArray(arrObj, filters);
                        
                       </td>
                     </tr>
-                  </tbody>
+                  </tbody> */}
                   
                 
               
@@ -182,14 +182,15 @@ const filtered = filterPlainArray(arrObj, filters);
       )}
 
 
+      
+{
+  balance===0?null:
+
                 <tbody>
                     <tr>
-                      <td></td>                      
+                      <td colSpan={5} className="capitalize">{accounts[keys]}</td> 
                       <td></td>
-                      <td></td>                      
-                      <td></td>
-                      <td></td> 
-                      <td className="balanace">
+                      <td >
                         {/* {obj.data.type==='debit'?
                             setBalance(balance+Number(obj.data.amount)):
                             setBalance(balance-Number(obj.data.amount))} */}
@@ -197,6 +198,7 @@ const filtered = filterPlainArray(arrObj, filters);
                       </td>
                     </tr>
                   </tbody>       
+}
     </>
   );
 };

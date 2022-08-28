@@ -135,8 +135,9 @@ const filtered = filterPlainArray(arrObj, filters);
 
       {filtered ? (
         filtered.map((obj, key) => {
-         
-
+          
+          
+          // console.log("🚀 ~ file: recordLedger.js ~ line 192 ~ filtered.map ~ filtered", filtered)
 
 
 
