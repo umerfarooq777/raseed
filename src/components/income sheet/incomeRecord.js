@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 // import TableContentSub from './TableContentSub'
 
 import FirebaseStack from "../../firebase-config";
 import { ref, get, child } from "firebase/database";
+import { IncomeContext } from "../../context/incomeContext";
 
 const RecordLedger = ({ array, keys, accounts, bal }) => {
-  // console.log("🚀 ~ file: incomeRecord.js ~ line 8 ~ RecordLedger ~ array", array)
-  // console.log("🚀 ~ file: recordLedger.js ~ line 8 ~ RecordLedger ~ accounts", accounts)
-  // console.log("🚀 ~ file: recordLedger.js ~ line 10 ~ RecordLedger ~ accounts", accounts,keys)
-
-  // console.log(array)
+  const { IncomeArray, setIncomeArray} = useContext(IncomeContext);
 
   const dbRef = ref(FirebaseStack());
   const [balance, setBalance] = useState(0);
@@ -91,14 +88,15 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
         // console.log("🚀 ~ file: incomeRecord.js ~ line 90 ~ filtered.map ~ obj", obj)
         if (obj.type === `debit`) {
           balance = balance + Number(obj.amount);
-          setBalance(balance);
+          setBalance(balance);          
+          // IncomeArray.push({acc:obj.title,bal:balance})
         } else if (obj.type === "credit") {
-          balance = Number(obj.amount) + balance;
+          balance = balance - Number(obj.amount);
           setBalance(balance);
+          // IncomeArray.push({acc:obj.title,bal:balance})
         }
       });
   };
-
 
   const getTotal = () => {
     var total = 0;
@@ -108,7 +106,7 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
         if (obj.type === "debit") {
           total = total + Number(obj.amount);
           // setBalance(balance);
-          console.log(total)
+          // console.log(total);
         } else if (obj.type === "credit") {
           total = Number(obj.amount) - total;
           // setBalance(balance);
@@ -116,10 +114,26 @@ const RecordLedger = ({ array, keys, accounts, bal }) => {
       });
   };
 
+
+var arrAcc = accounts[keys];
+  IncomeArray.push({arrAcc,bal:balance})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <>
-     
-
       {filtered ? (
         filtered.map((obj, key) => {
           return (

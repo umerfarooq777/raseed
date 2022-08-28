@@ -9,17 +9,8 @@ import { TrailBalanceContext } from "../context/trailBalanceContext";
 // import TableContent from "react-bootstrap/TableContent";
 
 function TrailBalanceSheet() {
-  const [generalRecords, setGeneralRecords] = useState([]);
   const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
-
-  const [balances, setBalances] = useState([]);
-  // console.log("🚀 ~ file: trail.js ~ line 18 ~ TrailBalanceSheet ~ balances", balances)
-
-  const [debitBal, setDebitBal] = useState("");
-  const [creditBal, setCreditBal] = useState("");
-
-  const [mode, setMode] = useState(true);
 
   const [DrArray, setDrArray] = useState([]);
   let DrArrayFiltered = DrArray.filter(
@@ -114,12 +105,9 @@ function TrailBalanceSheet() {
 
   const getTotal = () => {};
 
-  
-
   var countDr = DrArrayFiltered.reduce((accumulator, object) => {
     return accumulator + object.bal;
   }, 0);
-
 
   var countCr = CrArrayFiltered.reduce((accumulator, object) => {
     return accumulator + object.bal;
@@ -152,7 +140,7 @@ function TrailBalanceSheet() {
                 <th>#</th>
                 <th colSpan={4}>Description/Account</th>
                 <th>Debit</th>
-                <th>Credit</th>
+                <th>Credit</th> 
               </tr>
             </thead>
 
@@ -180,9 +168,19 @@ function TrailBalanceSheet() {
             <tbody>
               <tr>
                 <td></td>
-                <td colSpan={4} className="capitalize">-------------total</td>
-                <td className="balanace">{mode === true ? countDr : null}</td>
-                <td className="balanace">{mode === true ? countCr : null}</td>
+                <td colSpan={4} className="capitalize">
+                  -------------total
+                </td>
+                <td className="balanace">
+                  {DrArrayFiltered.reduce((accumulator, object) => {
+                    return accumulator + object.bal;
+                  }, 0)}
+                </td>
+                <td className="balanace">
+                  {CrArrayFiltered.reduce((accumulator, object) => {
+                    return accumulator + object.bal;
+                  }, 0)}
+                </td>
               </tr>
 
               <tr>
@@ -191,12 +189,12 @@ function TrailBalanceSheet() {
                   className={
                     countDr === countCr && countCr <= 0 && countDr <= 0
                       ? "credit-text capitalize text-center"
-                      : "debit-text capitalize text-center"  
+                      : "debit-text capitalize text-center"
                   }
                 >
                   {countDr === countCr && countCr <= 0 && countDr <= 0
                     ? "UNBALANCED"
-                    :"BALANCED" }
+                    : "BALANCED"}
                 </td>
               </tr>
             </tbody>

@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 // import TableContentSub from './TableContentSub'
 
 import FirebaseStack from "../../firebase-config";
 import { ref, get, child } from "firebase/database";
+import { IncomeContext } from "../../context/incomeContext";
 
 const RecordLedger1 = ({ array, keys, accounts, bal }) => {
+
+
+
+  
+  const { EquityArray,setEquityArray} = useContext(IncomeContext);
 // console.log("🚀 ~ file: incomeRecord.js ~ line 8 ~ RecordLedger ~ array", array)
 // console.log("🚀 ~ file: recordLedger.js ~ line 8 ~ RecordLedger ~ accounts", accounts)
   // console.log("🚀 ~ file: recordLedger.js ~ line 10 ~ RecordLedger ~ accounts", accounts,keys)
@@ -94,7 +100,7 @@ const filtered = filterPlainArray(arrObj, filters);
       var balance = 0;
       filtered && filtered.map((obj) => {
           if (obj.type === `debit`) {
-            balance = (balance+(Number(obj.amount)))
+            balance = (balance-(Number(obj.amount)))
               setBalance(balance)
           }
           else if(obj.type === 'credit'){
@@ -107,6 +113,9 @@ const filtered = filterPlainArray(arrObj, filters);
 
 
 
+
+  var arrAcc = accounts[keys];
+  EquityArray.push({arrAcc,bal:balance})
 
 
 
@@ -136,23 +145,8 @@ const filtered = filterPlainArray(arrObj, filters);
         </tr>
       </thead> */}
 
-      {filtered ? (
+      {/* {filtered ? (
         filtered.map((obj, key) => {
-         
-
-
-
-
-
-          
-          // console.log("🚀 ~ file: incomeRecord.js ~ line 193 ~ filtered.map ~ filtered", filtered)
-            // console.log("🚀 ~ file: recordLedger.js ~ line 139 ~ filtered.map ~ obj", obj)
-            // console.log("🚀 ~ file: recordLedger.js ~ line 151 ~ filtered.map ~ filtered", filtered)
-         
-          // var balance=0;
-          //   console.log("🚀 ~ file: recordLedger.js ~ line 75 ~ array.map ~ obj", obj.data.title)
-
-          //   console.log(balance+"oooopppp")
 
           return (
             <>
@@ -164,8 +158,8 @@ const filtered = filterPlainArray(arrObj, filters);
                       <td
                         className={
                           obj.type === "debit"
-                            ? "debit-text"
-                            : "credit-text"
+                            ? "credit-text"
+                            : "debit-text"
                         }
                       >
                         {obj.type === "debit" ? obj.amount : null}
@@ -173,16 +167,14 @@ const filtered = filterPlainArray(arrObj, filters);
                       <td
                         className={
                           obj.type === "credit"
-                            ? "credit-text"
-                            : "debit-text"
+                            ? "debit-text"
+                            : "credit-text"
                         }
                       >
                         {obj.type === "credit" ? obj.amount : null}
                       </td>
                       <td>
-                        {/* {obj.data.type==='debit'?
-                            setBalance(balance+Number(obj.data.amount)):
-                            setBalance(balance-Number(obj.data.amount))} */}
+                        
                        
                       </td>
                     </tr>
@@ -197,20 +189,17 @@ const filtered = filterPlainArray(arrObj, filters);
         <>
           <p>No data mapping</p>
         </>
-      )}
+      )} */}
 
 
-                <tbody>
-                    <tr>
-                      <td colSpan={5}></td> 
+                    <tr >
+                      <td colSpan={3} className="capitalize">{accounts[keys]}</td> 
+                      <td className={balance < 0 ? "credit-text" : "debit-text"}>{balance>0?balance:null}</td>
+                      <td className={balance < 0 ? "credit-text" : "debit-text"}>{balance<0?balance:null}</td>
                       <td className="balanace">
-                        {/* {obj.data.type==='debit'?
-                            setBalance(balance+Number(obj.data.amount)):
-                            setBalance(balance-Number(obj.data.amount))} */}
-                        {balance}
                       </td>
                     </tr>
-                  </tbody>       
+                     
     </>
   );
 };

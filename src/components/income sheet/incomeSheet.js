@@ -6,12 +6,38 @@ import { Container, Row, Col } from "react-bootstrap";
 import RecordLedger from "./incomeRecord";
 import RecordLedger1 from "./capitalRec";
 import Loader from "../loader";
+import { IncomeContext } from "../../context/incomeContext";
 // import TableContent from "react-bootstrap/TableContent";
 
 function IncomeSheet() {
   const [generalRecords, setGeneralRecords] = useState([]);
   const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
+
+  const [IncomeArray, setIncomeArray] = useState([]);
+  
+  
+  let IncomeArrayFiltered = IncomeArray.filter(
+    (ele, ind) =>
+      ind ===
+      IncomeArray.findIndex((elem) => elem.acc === ele.acc && elem.bal === ele.bal)
+  );
+  // console.log("🚀 ~ file: incomeSheet.js ~ line 25 ~ IncomeSheet ~ IncomeArrayFiltered", IncomeArrayFiltered)
+  // console.log("🚀 ~ file: incomeSheet.js ~ line 18 ~ IncomeSheet ~ IncomeArray", IncomeArray)
+
+
+  const [EquityArray, setEquityArray] = useState([]);
+  // console.log("🚀 ~ file: incomeSheet.js ~ line 30 ~ IncomeSheet ~ EquityArray", EquityArray)
+  
+  
+  let EquityArrayFiltered = EquityArray.filter(
+    (ele, ind) =>
+      ind ===
+      EquityArray.findIndex((elem) => elem.acc === ele.acc && elem.bal === ele.bal)
+  );
+  // console.log("🚀 ~ file: incomeSheet.js ~ line 38 ~ IncomeSheet ~ EquityArrayFiltered", EquityArrayFiltered)
+
+
 
   const [debitBal, setDebitBal] = useState(0);
   const [creditBal, setCreditBal] = useState(0);
@@ -44,66 +70,22 @@ function IncomeSheet() {
         console.error(error);
       });
   };
+  var IncomeTotal = IncomeArrayFiltered.reduce((accumulator, object) => {
+    return accumulator + object.bal;
+  }, 0);
 
-  // useEffect(() => {
-  //   getAccountsFromFirebase();
-  // }, []);
 
-  //   const getAccountsFromFirebase = async () => {
-  //     get(child(dbRef, `accounts/`))
-  //       .then((snapshot) => {
-  //         if (snapshot.exists()) {
-  //         //   setFirebaseData(snapshot.val());
-  //         //   setStopData(false);
-  //         // setGeneralRecords(snapshot.val())
-  //         setTitles(snapshot.val())
-
-  //         // console.log(firebaseData)
-  //         } else {
-  //           console.log("No data available");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   };
-
-  // useEffect(()=>{
-  //         getTrailBalance()
-  //     },[titles])
-
-  //     const getTrailBalance = () => {
-  //         // var balance = 0;
-  //         firebaseData && firebaseData.map((obj) => {
-  //             if (obj.data.type === 'debit') {
-  //               setBalance(balance+(Number(obj.data.amount)))
-  //             }
-  //             else if(obj.data.type === 'credit'){
-  //               setBalance(balance-(Number(obj.data.amount)))
-  //             }
-  //         })
-  //         setBalance(balance)
-  //     }
-
-  // for (let index = 0; index < firebaseData.length; index++) {
-  //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
-
-  //     if(obj == firebaseData[index].data.title){
-  //       setBalance(balance+Number(firebaseData[index].data.amount))
-  //   }else{
-  //       setBalance(balance-Number(firebaseData[index].data.amount))
-  //   }
-  // }
-
-  // console.log(generalRecords[0].debit)
-
+  var EquityTotal = EquityArrayFiltered.reduce((accumulator, object) => {
+    return accumulator + object.bal;
+  }, 0);
   ////=========================================================
   return (
     <>
       <Container>
+        <IncomeContext.Provider value={{IncomeArray,setIncomeArray,EquityArray,setEquityArray}}>
         <Row className="d-flex">
           <Col>
-            {/* <h2 className="text-center">Income Statement</h2> */}
+            {/* ============================================================== Income Statement */}
             <Table
               striped
               bordered
@@ -151,13 +133,14 @@ function IncomeSheet() {
 
               <tbody>
                 <tr>
-                  <td colSpan={5}>Net Income/Net Loss</td>
-                  <td className="balanace">{balance}</td>
+                  <td colSpan={5} className={IncomeTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>{IncomeTotal > 0 ? "Net Income" : "Net Loss"}</td>
+                  <td className={IncomeTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>{IncomeTotal}</td>
                 </tr>
               </tbody>
             </Table>
           </Col>
 
+          {/* ==============================================================Owner's Equity And Capital */}
           <Col>
             <Table
               striped
@@ -170,19 +153,39 @@ function IncomeSheet() {
                 <tr>
                   <th colSpan={6}>
                     <h4 className="ledger-title capitalize text-center  ">
-                      Owner's Equity And Capital
+                     Capital And Drawings
                     </h4>
                   </th>
                 </tr>
                 <tr>
-                  <th>Date</th>
-                  <th>Description/Account</th>
-                  <th>Ref</th>
+                  <th colSpan={3}>Description/Account</th>
                   <th>Debit</th>
                   <th>Credit</th>
                   <th>Total</th>
                 </tr>
               </thead>
+              <tbody>
+                  {
+                    IncomeTotal>0
+                    ?
+                    <tr>
+                        <td colSpan={3} className="capitalize">{IncomeTotal > 0 ? "Net Income from Income Statement" : "Net Loss from Income Statement"}</td> 
+                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal>0?IncomeTotal:null}</td>
+                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal<0?IncomeTotal:null}</td>
+                        <td className="balanace"></td>
+                      </tr>
+                    :
+                    null
+                  }
+
+
+
+                      {/* <tr>
+                        <td colSpan={3} className="capitalize">{IncomeTotal > 0 ? "Net Income" : "Net Loss"}</td> 
+                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal<0?IncomeTotal:null}</td>
+                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal>0?IncomeTotal:null}</td>
+                        <td className="balanace"></td>
+                      </tr> */}
               {titles1 ? (
                 titles1.map((obj, key) => {
                   // console.log("🚀 ~ file: incomeSheet.js ~ line 163 ~ titles1.map ~ titles1", titles1)
@@ -191,6 +194,7 @@ function IncomeSheet() {
 
                   return (
                     <>
+                      
                       <RecordLedger1
                         array={firebaseData}
                         keys={key}
@@ -205,9 +209,33 @@ function IncomeSheet() {
                   <Loader />
                 </>
               )}
+
+
+                  {
+                    IncomeTotal<0
+                    ?
+                    <tr className='recorddivider'>
+                    <td colSpan={3} className="capitalize">{IncomeTotal > 0 ? "Net Income from Income Statement" : "Net Loss from Income Statement"}</td> 
+                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal>0?IncomeTotal:null}</td>
+                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal<0?IncomeTotal:null}</td>
+                        <td className="balanace"></td>
+                      </tr>
+                    :
+                    null
+                  }
+
+
+                <tr>
+                  <td colSpan={5} className={EquityTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>Owner's Total Equity</td>
+                  <td className={EquityTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>{EquityTotal}</td>
+                </tr>
+                    
+              </tbody>
             </Table>
           </Col>
         </Row>
+
+        </IncomeContext.Provider>
       </Container>
     </>
   );

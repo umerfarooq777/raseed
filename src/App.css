@@ -114,6 +114,17 @@ table{
   color: #1773ec!important;
 }
 
+.balance-total-debit{
+  font-weight: bolder;
+  font-size: 25px!important;
+  color:  rgb(14, 196, 14)!important;
+}
+
+.balance-total-credit{
+  font-weight: bolder;
+  font-size: 25px!important;
+  color:  rgb(233, 40, 40)!important;
+}
 
 .toast-header .btn-close {
   display: none;

@@ -43,7 +43,12 @@ function GeneralRecords() {
 
       <Container>
       <h2> </h2>
-
+     {
+      generalRecords && generalRecords?
+      null
+      :
+      <Loader/>
+     }
 
 {generalRecords && generalRecords?
 
@@ -80,14 +85,22 @@ function GeneralRecords() {
               null
             )}
           </tbody> 
+        
         </Table>
         :
         
-        <>
-        <Row>
-        <Loader/>
-        </Row>
-        </>
+        <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th colSpan={6}>
+
+          <Loader/>
+            </th>
+          </tr>
+          
+        </thead>
+      
+      </Table>
         
         }
         
