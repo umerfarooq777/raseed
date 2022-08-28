@@ -10,7 +10,8 @@ const RecordLedger1 = ({ array, keys, accounts, bal }) => {
 
 
   
-  const { EquityArray,setEquityArray} = useContext(IncomeContext);
+  const { EquityArray,setEquityArray,EquityTotal} = useContext(IncomeContext);
+  // console.log("🚀 ~ file: capitalRec.js ~ line 14 ~ RecordLedger1 ~ EquityTotal", EquityTotal)
 // console.log("🚀 ~ file: incomeRecord.js ~ line 8 ~ RecordLedger ~ array", array)
 // console.log("🚀 ~ file: recordLedger.js ~ line 8 ~ RecordLedger ~ accounts", accounts)
   // console.log("🚀 ~ file: recordLedger.js ~ line 10 ~ RecordLedger ~ accounts", accounts,keys)

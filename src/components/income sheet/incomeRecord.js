@@ -180,7 +180,7 @@ var arrAcc = accounts[keys];
             {/* {obj.data.type==='debit'?
                             setBalance(balance+Number(obj.data.amount)):
                             setBalance(balance-Number(obj.data.amount))} */}
-            {balance}
+            {-(balance)}
           </td>
         </tr>
       </tbody>

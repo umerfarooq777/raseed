@@ -70,19 +70,25 @@ function IncomeSheet() {
         console.error(error);
       });
   };
-  var IncomeTotal = IncomeArrayFiltered.reduce((accumulator, object) => {
+  var IncomeTotal = -(IncomeArrayFiltered.reduce((accumulator, object) => {
+    return accumulator + object.bal;
+  }, 0))
+
+
+  var Equity = EquityArrayFiltered.reduce((accumulator, object) => {
     return accumulator + object.bal;
   }, 0);
 
+  var EquityTotal = Equity+IncomeTotal;
 
-  var EquityTotal = EquityArrayFiltered.reduce((accumulator, object) => {
-    return accumulator + object.bal;
-  }, 0);
+
+
+
   ////=========================================================
   return (
     <>
       <Container>
-        <IncomeContext.Provider value={{IncomeArray,setIncomeArray,EquityArray,setEquityArray}}>
+        <IncomeContext.Provider value={{IncomeArray,setIncomeArray,EquityArray,setEquityArray,EquityTotal}}>
         <Row className="d-flex">
           <Col>
             {/* ============================================================== Income Statement */}
@@ -133,8 +139,8 @@ function IncomeSheet() {
 
               <tbody>
                 <tr>
-                  <td colSpan={5} className={IncomeTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>{IncomeTotal > 0 ? "Net Income" : "Net Loss"}</td>
-                  <td className={IncomeTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>{IncomeTotal}</td>
+                  <td colSpan={5} className={IncomeTotal >= 0 ? "balance-total-debit" : "balance-total-credit"}>{IncomeTotal >= 0 ? "Net Income" : "Net Loss"}</td>
+                  <td className={IncomeTotal >= 0 ? "balance-total-debit" : "balance-total-credit"}>{IncomeTotal}</td>
                 </tr>
               </tbody>
             </Table>
@@ -166,11 +172,11 @@ function IncomeSheet() {
               </thead>
               <tbody>
                   {
-                    IncomeTotal>0
+                    IncomeTotal>=0
                     ?
                     <tr>
-                        <td colSpan={3} className="capitalize">{IncomeTotal > 0 ? "Net Income from Income Statement" : "Net Loss from Income Statement"}</td> 
-                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal>0?IncomeTotal:null}</td>
+                        <td colSpan={3} className="capitalize">{IncomeTotal >= 0 ? "Net Income from Income Statement" : "Net Loss from Income Statement"}</td> 
+                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal>=0?IncomeTotal:null}</td>
                         <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal<0?IncomeTotal:null}</td>
                         <td className="balanace"></td>
                       </tr>
@@ -226,8 +232,8 @@ function IncomeSheet() {
 
 
                 <tr>
-                  <td colSpan={5} className={EquityTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>Owner's Total Equity</td>
-                  <td className={EquityTotal > 0 ? "balance-total-debit" : "balance-total-credit"}>{EquityTotal}</td>
+                  <td colSpan={5} className={EquityTotal >= 0 ? "balance-total-debit" : "balance-total-credit"}>Owner's Total Equity</td>
+                  <td className={EquityTotal >= 0 ? "balance-total-debit" : "balance-total-credit"}>{EquityTotal}</td>
                 </tr>
                     
               </tbody>
