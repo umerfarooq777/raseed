@@ -124,73 +124,7 @@ const filtered = filterPlainArray(arrObj, filters);
 
   return (
     <>
-      {
-        // console.log(entry)
-      }
-
-      {/* <thead className="account-card">
-        <tr>
-          <th colSpan={6}>
-            <h4 className="ledger-title capitalize text-center  ">
-              {accounts[keys]}
-            </h4>
-          </th>
-        </tr>
-        <tr>
-          <th>Date</th>
-          <th>Description/Account</th>
-          <th>Ref</th>
-          <th>Debit</th>
-          <th>Credit</th>
-          <th>Total</th>
-        </tr>
-      </thead> */}
-
-      {/* {filtered ? (
-        filtered.map((obj, key) => {
-
-          return (
-            <>
-                  <tbody>
-                    <tr className="">
-                      <td>{obj.date}</td>
-                      <td className="capitalize">{obj.title}</td>
-                      <td>--</td>
-                      <td
-                        className={
-                          obj.type === "debit"
-                            ? "credit-text"
-                            : "debit-text"
-                        }
-                      >
-                        {obj.type === "debit" ? obj.amount : null}
-                      </td>
-                      <td
-                        className={
-                          obj.type === "credit"
-                            ? "debit-text"
-                            : "credit-text"
-                        }
-                      >
-                        {obj.type === "credit" ? obj.amount : null}
-                      </td>
-                      <td>
-                        
-                       
-                      </td>
-                    </tr>
-                  </tbody>
-                  
-                
-              
-            </>
-          );
-        })
-      ) : (
-        <>
-          <p>No data mapping</p>
-        </>
-      )} */}
+      
 
 
                     <tr >

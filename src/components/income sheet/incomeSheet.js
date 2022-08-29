@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import Table from "react-bootstrap/Table";
 import { ref, get, child } from "firebase/database";
 import FirebaseStack from "../../firebase-config";
@@ -14,8 +14,8 @@ function IncomeSheet() {
   const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
 
-  const [IncomeArray, setIncomeArray] = useState([]);
   
+  const { IncomeArray,EquityArray,EquityTotal,setEquityTotal} = useContext(IncomeContext);
   
   let IncomeArrayFiltered = IncomeArray.filter(
     (ele, ind) =>
@@ -26,7 +26,6 @@ function IncomeSheet() {
   // console.log("🚀 ~ file: incomeSheet.js ~ line 18 ~ IncomeSheet ~ IncomeArray", IncomeArray)
 
 
-  const [EquityArray, setEquityArray] = useState([]);
   // console.log("🚀 ~ file: incomeSheet.js ~ line 30 ~ IncomeSheet ~ EquityArray", EquityArray)
   
   
@@ -70,6 +69,19 @@ function IncomeSheet() {
         console.error(error);
       });
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
   var IncomeTotal = -(IncomeArrayFiltered.reduce((accumulator, object) => {
     return accumulator + object.bal;
   }, 0))
@@ -79,8 +91,8 @@ function IncomeSheet() {
     return accumulator + object.bal;
   }, 0);
 
-  var EquityTotal = Equity+IncomeTotal;
-
+    // EquityTotal = Equity+IncomeTotal;
+    setEquityTotal((Equity+IncomeTotal))
 
 
 
@@ -88,7 +100,7 @@ function IncomeSheet() {
   return (
     <>
       <Container>
-        <IncomeContext.Provider value={{IncomeArray,setIncomeArray,EquityArray,setEquityArray,EquityTotal}}>
+        
         <Row className="d-flex">
           <Col>
             {/* ============================================================== Income Statement */}
@@ -186,12 +198,7 @@ function IncomeSheet() {
 
 
 
-                      {/* <tr>
-                        <td colSpan={3} className="capitalize">{IncomeTotal > 0 ? "Net Income" : "Net Loss"}</td> 
-                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal<0?IncomeTotal:null}</td>
-                        <td className={IncomeTotal < 0 ? "credit-text" : "debit-text"}>{IncomeTotal>0?IncomeTotal:null}</td>
-                        <td className="balanace"></td>
-                      </tr> */}
+                      
               {titles1 ? (
                 titles1.map((obj, key) => {
                   // console.log("🚀 ~ file: incomeSheet.js ~ line 163 ~ titles1.map ~ titles1", titles1)
@@ -241,7 +248,7 @@ function IncomeSheet() {
           </Col>
         </Row>
 
-        </IncomeContext.Provider>
+        
       </Container>
     </>
   );

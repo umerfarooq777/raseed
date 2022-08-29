@@ -5,10 +5,8 @@ import FirebaseStack from "../firebase-config";
 import { ref, get, child } from "firebase/database";
 import { IncomeContext } from "../context/incomeContext";
 
-const BalanceSheetRecords = ({ array, keys, accounts, bal }) => {
-  const { AssetArray, setAssetArray} = useContext(IncomeContext);
-
-  // console.log(array)
+const BalanceSheetRecords1 = ({ array, keys, accounts, bal }) => {
+  const { LiabilityArray, setLiabilityArray} = useContext(IncomeContext);
 
   const dbRef = ref(FirebaseStack());
   const [balance, setBalance] = useState(0);
@@ -102,24 +100,20 @@ const filtered = filterPlainArray(arrObj, filters);
       
   }
 
-if(balance===0){
 
-}else{ 
-  var arrAcc = accounts[keys];
-  AssetArray.push({arrAcc,bal:balance})
-}
-// console.log("🚀 ~ file: balanceSheetRecords.js ~ line 109 ~ BalanceSheetRecords ~ arrAcc", arrAcc)
-// console.log("🚀 ~ file: balanceSheetRecords.js ~ line 110 ~ BalanceSheetRecords ~ AssetArray", AssetArray)
+  if(balance===0){
 
-// console.log("🚀 ~ file: balanceSheetRecords.js ~ line 112 ~ BalanceSheetRecords ~ AssetArray", AssetArray)
-
+  }else{ 
+    var arrAcc = accounts[keys];
+    // console.log("🚀 ~ file: balanceSheetRecords1.js ~ line 110 ~ BalanceSheetRecords1 ~ arrAcc", arrAcc)
+    LiabilityArray.push({arrAcc,bal:balance})
+  }
+  
   return (
     <>
-
- 
-      
 {
-  balance===0?null:   
+  balance===0?null
+  :
                 <tbody>
                     <tr>
                       <td colSpan={5} className="capitalize">{accounts[keys]}</td> 
@@ -127,14 +121,14 @@ if(balance===0){
                       <td >
                         {/* {obj.data.type==='debit'?
                             setBalance(balance+Number(obj.data.amount)):
-                            setBalance(balance-Number(obj.data.amount))} */}
-                        {balance}
+                          setBalance(balance-Number(obj.data.amount))} */}
+                        {-(balance)}
                       </td>
                     </tr>
-                  </tbody>       
+                          </tbody>       
 }
     </>
   );
 };
 
-export default BalanceSheetRecords;
+export default BalanceSheetRecords1;

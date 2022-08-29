@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Table from "react-bootstrap/Table";
 import { ref, get, child } from "firebase/database";
 import FirebaseStack from "../firebase-config";
@@ -8,16 +8,22 @@ import Loader from "./loader";
 import { TrailBalanceContext } from "../context/trailBalanceContext";
 // import TableContent from "react-bootstrap/TableContent";
 
+// const [balance, setBalance] = useState(0);
+
+
+
 function TrailBalanceSheet() {
   const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
+  const [debitBal, setDebitBal] = useState(0);
+  // console.log("🚀 ~ file: trail.js ~ line 19 ~ TrailBalanceSheet ~ debitBal", debitBal)
 
   const [DrArray, setDrArray] = useState([]);
   let DrArrayFiltered = DrArray.filter(
     (ele, ind) =>
       ind ===
       DrArray.findIndex((elem) => elem.acc === ele.acc && elem.bal === ele.bal)
-  );
+  ); 
   //console.log("🚀 ~ file: trail.js ~ line 27 ~ TrailBalanceSheet ~ DrArrayFiltered", DrArrayFiltered)
 
   const [CrArray, setCrArray] = useState([]);
@@ -82,7 +88,7 @@ function TrailBalanceSheet() {
 
   useEffect(() => {
     getTrailBalance();
-    getTotal();
+    // getTotal();
   }, [titles]);
 
   const getTrailBalance = () => {
@@ -99,11 +105,19 @@ function TrailBalanceSheet() {
     setBalance(balance);
   };
 
-  useEffect(() => {
-    getTotal();
-  }, []);
+  // useEffect(() => {
+  //   getTotal();
+  // }, [DrArrayFiltered]);
 
-  const getTotal = () => {};
+  // const getTotal = () => {
+    
+  //   var arrDebit =0 
+  //   DrArrayFiltered && DrArrayFiltered.forEach((obj) => {
+  //     arrDebit = arrDebit + parseInt(obj.bal)
+  //   })
+  //   setDebitBal(arrDebit)
+  //   console.log("🚀 ~ file: trail.js ~ line 119 ~ getTotal ~ arrDebit", arrDebit)
+  // };
 
   var countDr = DrArrayFiltered.reduce((accumulator, object) => {
     return accumulator + object.bal;
