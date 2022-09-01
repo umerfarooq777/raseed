@@ -142,6 +142,14 @@ function BalanceSheet() {
 // console.log("clicked")
 //   } 
 
+
+// useEffect(() => {
+//   const timer = setTimeout(() => {
+//     console.log('This will run after 1 second!')
+//   }, 5000);
+//   return () => clearTimeout(timer);
+// }, [AssetArrayFiltered]); 
+
   ////=========================================================
   return (
     <>
@@ -249,7 +257,7 @@ function BalanceSheet() {
                 })
               ) : (
                 <>
-                  <Loader />
+                  <Loader /> 
                 </>
               )}
               <tbody>
@@ -307,7 +315,7 @@ function BalanceSheet() {
               : "UNBALANCED"}
           </h1>
         </Row><Row>
-        <button 
+        <button
         >Click to reload!</button>
         </Row>
       </Container>

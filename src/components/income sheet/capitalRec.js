@@ -116,7 +116,7 @@ const filtered = filterPlainArray(arrObj, filters);
 
 
   var arrAcc = accounts[keys];
-  EquityArray.push({arrAcc,bal:balance})
+  EquityArray.push({acc:arrAcc,bal:balance})
 
 
 

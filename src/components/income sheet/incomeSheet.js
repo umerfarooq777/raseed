@@ -35,7 +35,7 @@ function IncomeSheet() {
       EquityArray.findIndex((elem) => elem.acc === ele.acc && elem.bal === ele.bal)
   );
   // console.log("🚀 ~ file: incomeSheet.js ~ line 38 ~ IncomeSheet ~ EquityArrayFiltered", EquityArrayFiltered)
-
+ 
 
 
   const [debitBal, setDebitBal] = useState(0);
@@ -91,8 +91,12 @@ function IncomeSheet() {
     return accumulator + object.bal;
   }, 0);
 
-    // EquityTotal = Equity+IncomeTotal;
-    setEquityTotal((Equity+IncomeTotal))
+  setEquityTotal((Equity+IncomeTotal)) 
+  // EquityTotal = Equity+IncomeTotal;
+  useEffect(()=>{
+      setEquityTotal((Equity+IncomeTotal))
+
+    },[EquityTotal])
 
 
 
