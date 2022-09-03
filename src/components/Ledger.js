@@ -10,7 +10,7 @@ import Loader from "./loader";
 function Ledger() {
   const [generalRecords, setGeneralRecords] = useState([]);
   const [firebaseData,setFirebaseData] =useState([]);
-  // console.log(firebaseData)
+  console.log(firebaseData)
 
   const [debitBal, setDebitBal] = useState(0)
   const [creditBal, setCreditBal] = useState(0)

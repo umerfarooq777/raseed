@@ -121,7 +121,7 @@ function BalanceSheet() {
 
   var LiabilityTotal = -(LiabilityArrayFiltered.reduce((accumulator, object) => {
     return accumulator + object.bal;
-  }, 0)); 
+  }, 0));  
   // console.log("🚀 ~ file: balanceSheet.js ~ line 118 ~ LiabilityTotal ~ LiabilityTotal", LiabilityTotal)
 
 // useEffect(() => {

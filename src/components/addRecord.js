@@ -351,7 +351,7 @@ const submitRecords=(e)=>{
       </div>
           {submitMode==='disabled'?
 
-          <Button variant="primary" className='mt-3 record-submit' disabled>Submit Records</Button>
+          <Button variant="primary" className='mt-3 record-submit' disabled>Balance the records to submit</Button>
           :
 
                   <Button variant="primary" className='mt-3 record-submit' onClick={(e)=>{submitRecords(e); refreshPage(); submitTransactions(e);}} >Submit Records</Button>
