@@ -11,7 +11,7 @@ import { TrailBalanceContext } from "../context/trailBalanceContext";
 // const [balance, setBalance] = useState(0);
 
 
-
+ 
 function TrailBalanceSheet() {
   const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
@@ -22,8 +22,11 @@ function TrailBalanceSheet() {
   let DrArrayFiltered = DrArray.filter(
     (ele, ind) =>
       ind ===
-      DrArray.findIndex((elem) => elem.acc === ele.acc && elem.bal === ele.bal)
-  ); 
+      DrArray.findIndex((elem) => {
+        return elem.acc === ele.acc && elem.bal === ele.bal
+      })
+      ); 
+      // console.log("🚀 ~ file: trail.js ~ line 26 ~ TrailBalanceSheet ~ DrArray", DrArray)
   //console.log("🚀 ~ file: trail.js ~ line 27 ~ TrailBalanceSheet ~ DrArrayFiltered", DrArrayFiltered)
 
   const [CrArray, setCrArray] = useState([]);
