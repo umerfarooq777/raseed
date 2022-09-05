@@ -4,19 +4,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
 import "../App.css"
-import Logo from "../images/logo.jfif"
+import Logo from "../images/logo-2.png"
 const NavbarApp=()=> {
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-      <Container >
-      <Navbar.Brand href="#" className='logo-text' style={{fontSize:35}}><img
+      <Container ><img
               alt=""
               src={Logo}
-              width="70"
-              height="60"
+              width="100"
+              height="90"
               className="d-inline-block align-top logo"
-            />{" "}RASEED</Navbar.Brand>
+            />
+      <Navbar.Brand href="#" className='logo-text' style={{fontSize:35}}>{"     "}&nbsp;&nbsp;RASEED&nbsp;&nbsp;&nbsp;</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -33,6 +33,8 @@ const NavbarApp=()=> {
 
             <NavDropdown title="Reports" className='link-anchors' id="navbarScrollingDropdown">
 
+              {/* <NavDropdown.Item href="#action3"><Link to="/incomeSheet" className='report-links'>Income Sheet</Link></NavDropdown.Item>
+              <NavDropdown.Divider /> */}
               <NavDropdown.Item href="#action3"><Link to="/balSheet" className='report-links'>Balance Sheet</Link></NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action4"><Link to="/trail" className='report-links'>Trail Balance Sheet</Link></NavDropdown.Item>

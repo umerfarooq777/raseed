@@ -89,7 +89,7 @@ function IncomeSheet() {
 
   var Equity = EquityArrayFiltered.reduce((accumulator, object) => {
     return accumulator + object.bal;
-  }, 0);
+  }, 0); 
 
   setEquityTotal((Equity+IncomeTotal)) 
   // EquityTotal = Equity+IncomeTotal;

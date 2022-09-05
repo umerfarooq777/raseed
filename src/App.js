@@ -14,6 +14,7 @@ import DashboardP from "./pages/dashboard";
 import LedgerP from "./pages/Ledger";
 import EntriesP from "./pages/entries";
 import BalanceSheetP from "./pages/balanceSheet";
+import IncP from "./pages/incomeSheet";
 import TrailBal from "./pages/trailBalance";
 // import your route components too
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/gj" element={<GE/>} />
         <Route path="/trail" element={<TrailBal/>} />
         <Route path="/balSheet" element={<BalanceSheetP/>} />
+        <Route path="/incomeSheet" element={<IncP/>} />
       </Routes>
     </BrowserRouter>
   );

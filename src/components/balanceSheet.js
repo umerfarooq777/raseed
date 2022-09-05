@@ -156,7 +156,7 @@ function BalanceSheet() {
       <Container>
         {}
 
-        <IncomeSheet />
+        <IncomeSheet /> 
 
         <h1 className="text-center">Balance Sheet</h1>
 
@@ -313,11 +313,12 @@ function BalanceSheet() {
             {AssetTotal === LiabilityTotal + EquityTotal
               ? "BALANCED"
               : "UNBALANCED"}
-          </h1>
-        </Row><Row>
+          </h1>  
+        </Row>
+        {/* <Row>
         <button
         >Click to reload!</button>
-        </Row>
+        </Row> */}
       </Container>
     </>
   );

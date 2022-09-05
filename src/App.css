@@ -8,10 +8,12 @@
   font-family: 'Varela Round', sans-serif!important;
 }
 .logo{
-  border-radius: 50%;
+  border-radius: ;
 }
 .logo-text{
-  color: #C5F500!important;
+  margin:auto 0;
+  color: #1E81CE!important;
+  font-weight:bold;
 }
 
 .Toast{
