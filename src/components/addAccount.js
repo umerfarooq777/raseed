@@ -78,7 +78,7 @@ function AddAccount() {
         // console.log(newAccounts)
   return (
    <>
-        <Form noValidate validated={validated} onSubmit={handleAddRecord}>
+        <Form noValidate validated={validated} onSubmit={handleAddRecord} className='forms'>
           {/* <p>       {JSON.stringify(accounts)} </p> */}
         <FloatingLabel controlId="floatingInputGrid" label="New Account Name">
           <Form.Control type="text" placeholder="Enter New Account Title" onChange={(e)=>{handelData(e)} } name='account'/>
