@@ -159,6 +159,7 @@ const handelData =(e)=>{
 const addRecord =(e)=>{
     e.preventDefault();
     
+    alert("New record has been added...");
     setrecordsDataObj([...recordsDataObj,data]);
     // console.log("🚀 ~ file: addRecord.js ~ line 133 ~ addRecord ~ recordsDataObj", recordsDataObj)
     var credit=0;
@@ -221,6 +222,7 @@ const submitRecords=(e)=>{
     // var date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
     // var time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
+    alert("All records has been submitted...");
         var data01 = []
         const obj = { 'debit': debitData }
         const obj1 = { 'credit': creditData }

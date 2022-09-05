@@ -63,11 +63,12 @@ function AddAccount() {
     const addAccount=(e)=>{
       setAccounts(accounts => [...accounts, newAccounts])
       // console.log("🚀 ~ file: addAccount.js ~ line 63 ~ addAccount ~ accounts", accounts,accounts.length)
-        // setNewAccounts([...newAccounts,accounts])
-        const index = accounts.length;
-        set(ref(db,'accounts/'+index), 
-        newAccounts
-        );
+      // setNewAccounts([...newAccounts,accounts])
+      const index = accounts.length;
+      set(ref(db,'accounts/'+index), 
+      newAccounts
+      );        
+      alert("New account has been added...");
       }
 
       function refreshPage() {
