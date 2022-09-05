@@ -1,0 +1,165 @@
+{
+  "accounts": [
+    "Capital",
+    "Cash",
+    "Office Equipment",
+    "Sales",
+    "Rent Expense"
+  ],
+  "record": [
+    {
+      "credit": [
+        {
+          "amount": "45000",
+          "category": "equity",
+          "date": "2022-09-05",
+          "title": "Capital",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "45000",
+          "category": "asset",
+          "date": "2022-09-05",
+          "title": "Cash",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "2000",
+          "category": "asset",
+          "date": "2022-09-06",
+          "title": "Cash",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "2000",
+          "category": "asset",
+          "date": "2022-09-06",
+          "title": "Office Equipment",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "10000",
+          "category": "revenue",
+          "date": "2022-09-07",
+          "title": "Sales",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "10000",
+          "category": "asset",
+          "date": "2022-09-07",
+          "title": "Cash",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "1000",
+          "category": "asset",
+          "date": "2022-09-09",
+          "title": "Cash",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "1000",
+          "category": "expense",
+          "date": "2022-09-09",
+          "title": "Rent Expense",
+          "type": "debit"
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "data": {
+        "amount": "45000",
+        "category": "equity",
+        "date": "2022-09-05",
+        "title": "Capital",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "45000",
+        "category": "asset",
+        "date": "2022-09-05",
+        "title": "Cash",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "asset",
+        "date": "2022-09-06",
+        "title": "Cash",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "2000",
+        "category": "asset",
+        "date": "2022-09-06",
+        "title": "Office Equipment",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "10000",
+        "category": "revenue",
+        "date": "2022-09-07",
+        "title": "Sales",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "10000",
+        "category": "asset",
+        "date": "2022-09-07",
+        "title": "Cash",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "1000",
+        "category": "expense",
+        "date": "2022-09-09",
+        "title": "Rent Expense",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "1000",
+        "category": "asset",
+        "date": "2022-09-09",
+        "title": "Cash",
+        "type": "credit"
+      }
+    }
+  ]
+}

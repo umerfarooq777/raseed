@@ -155,7 +155,7 @@ function BalanceSheet() {
     <>
       <Container>
         {}
-   
+     
         <IncomeSheet /> 
 
         <h1 className="text-center">Balance Sheet</h1>
@@ -176,10 +176,13 @@ function BalanceSheet() {
                   <th></th>
                   <th>Total Balance</th>
                 </tr>
-              </thead>
+              </thead>   
               {filtered ? (
                 filtered.map((obj, key) => {
                   let account = Object.assign({}, titles);
+                  // console.log("🚀 ~ file: balanceSheet.js ~ line 183 ~ filtered.map ~ account", account)
+                  // console.log("🚀 ~ file: balanceSheet.js ~ line 195 ~ filtered.map ~ filtered", key)
+                  // console.log("🚀 ~ file: balanceSheet.js ~ line 196 ~ filtered.map ~ filtered", filtered)
 
                   return (
                     <>

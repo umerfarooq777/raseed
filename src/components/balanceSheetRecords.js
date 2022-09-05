@@ -6,6 +6,8 @@ import { ref, get, child } from "firebase/database";
 import { IncomeContext } from "../context/incomeContext";
 
 const BalanceSheetRecords = ({ array, keys, accounts, bal }) => {
+  // console.log("🚀 ~ file: balanceSheetRecords.js ~ line 9 ~ BalanceSheetRecords ~ keys", keys)
+  // console.log("🚀 ~ file: balanceSheetRecords.js ~ line 9 ~ BalanceSheetRecords ~ accounts", accounts[keys])
   const { AssetArray, setAssetArray} = useContext(IncomeContext);
 
   // console.log(array)
