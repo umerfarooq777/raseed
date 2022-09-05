@@ -10,14 +10,14 @@ import { TrailBalanceContext } from "../context/trailBalanceContext";
 
 // const [balance, setBalance] = useState(0);
 
-
+ 
  
 function TrailBalanceSheet() {
   const [firebaseData, setFirebaseData] = useState([]);
   // console.log(firebaseData)
   const [debitBal, setDebitBal] = useState(0);
   // console.log("🚀 ~ file: trail.js ~ line 19 ~ TrailBalanceSheet ~ debitBal", debitBal)
-
+ 
   const [DrArray, setDrArray] = useState([]);
   let DrArrayFiltered = DrArray.filter(
     (ele, ind) =>

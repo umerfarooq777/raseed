@@ -8,8 +8,33 @@
   font-family: 'Varela Round', sans-serif!important;
 }
 .logo{
-  border-radius: ;
+  transition:1s;  
+  animation: flip 4s infinite;
 }
+
+@keyframes flip {
+  50% {
+    transition:1s;  
+    transform: scaleX(1);
+    /* background:blue; */
+  }
+/* 
+  50% {
+    transition:1s;  
+    transform: scaleX(1);
+  } */
+
+  0% {
+    transition:1s;  
+    transform: scaleX(-1)
+  }
+}
+
+
+/* .logo:hover{
+  transition:.75s;
+  transform: scaleX(-1);
+} */
 .logo-text{
   margin:auto 0;
   color: #1E81CE!important;

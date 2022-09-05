@@ -262,8 +262,8 @@ const submitRecords=(e)=>{
         <Form noValidate validated={validated} onSubmit={handleAddRecord} className='forms'>
 
         <h2 className='text-white text-center mb-3'>Add Records</h2>
-        <FloatingLabel controlId="floatingInputGrid" label="Date" className="mb-3">
           <Form.Control type="date" placeholder="name@example.com" onChange={(e)=>{handelData(e)}} name='date' />
+        <FloatingLabel controlId="floatingInputGrid" label="" className="mb-3">
         </FloatingLabel>
        
           <Form.Select aria-label="Floating label select example"  className="mb-3" onChange={(e)=>{handelData(e)} } name='title'>

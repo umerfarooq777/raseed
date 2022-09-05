@@ -155,7 +155,7 @@ function BalanceSheet() {
     <>
       <Container>
         {}
-
+   
         <IncomeSheet /> 
 
         <h1 className="text-center">Balance Sheet</h1>
