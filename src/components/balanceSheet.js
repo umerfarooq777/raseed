@@ -175,7 +175,7 @@ function BalanceSheet() {
                   <th colSpan={5}>Description/Account</th>
                   <th></th>
                   <th>Total Balance</th>
-                </tr>
+                </tr> 
               </thead>   
               {filtered ? (
                 filtered.map((obj, key) => {

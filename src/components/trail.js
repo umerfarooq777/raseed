@@ -10,7 +10,7 @@ import { TrailBalanceContext } from "../context/trailBalanceContext";
 
 // const [balance, setBalance] = useState(0);
 
- 
+  
  
 function TrailBalanceSheet() {
   const [firebaseData, setFirebaseData] = useState([]);
