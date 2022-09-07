@@ -86,6 +86,7 @@ function AddAccount() {
         </FloatingLabel>
         
         <Button variant="primary" className='mt-3 record-submit' onClick={(e)=>{addAccount(e);refreshPage();} } >Add New Account</Button>
+        {/* <Button variant="primary" className='mt-3 record-submit' disabled>Functions are disabled by Umer Farooq</Button> */}
 
 
         </Form>

@@ -356,6 +356,7 @@ const submitRecords=(e)=>{
           <Button variant="primary" className='mt-3 record-submit' disabled>Balance the records to submit</Button>
           :
 
+          // <Button variant="primary" className='mt-3 record-submit' disabled>Functions are disabled by Umer Farooq</Button>
                   <Button variant="primary" className='mt-3 record-submit' onClick={(e)=>{submitRecords(e); refreshPage(); submitTransactions(e);}} >Submit Records</Button>
           }
         </Form>
