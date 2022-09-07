@@ -10,7 +10,7 @@ import Loader from "./loader";
 function Ledger() {
   const [generalRecords, setGeneralRecords] = useState([]);
   const [firebaseData,setFirebaseData] =useState([]);
-  console.log(firebaseData)
+  // console.log(firebaseData)
 
   const [debitBal, setDebitBal] = useState(0)
   const [creditBal, setCreditBal] = useState(0)
@@ -125,19 +125,6 @@ useEffect(() => {
             {titles ? (
               titles.map((obj, key) => {
               // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[0].data.title)
-                // for (let index = 0; index < firebaseData.length; index++) {
-                //   // console.log("🚀 ~ file: ledger.js ~ line 104 ~ titles.map ~ obj", firebaseData[index].data.title)
-                  
-                //     if(obj == firebaseData[index].data.title){
-                //       setBalance(balance+Number(firebaseData[index].data.amount))
-                //   }else{
-                //       setBalance(balance-Number(firebaseData[index].data.amount))
-                //   }
-
-
-                  
-                // }
-                // console.log("🚀 ~ file: ledger.js ~ line 109 ~ titles.map ~ titles", titles)
                 
                 let account = Object.assign({},titles)
                 

@@ -63,8 +63,8 @@ const [indexLen, setIndexLen] = useState(0);
 
 useEffect(() => {
     getAccounts();
-    getDataFromFirebase();
-    getDataFromFirebaseRecords();
+    // getDataFromFirebase();
+    // getDataFromFirebaseRecords();
   }, []);
   
 
@@ -102,36 +102,36 @@ const getAccounts = async () => {
 
 
 
-const getDataFromFirebase = async () => {
-    get(child(dbRef, `transactions/`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-        //   setFirebaseData(snapshot.val());
-        //   setStopData(false);
-        setdatafirebase(snapshot.val())
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+// const getDataFromFirebase = async () => {
+//     get(child(dbRef, `transactions/`))
+//       .then((snapshot) => {
+//         if (snapshot.exists()) {
+//         //   setFirebaseData(snapshot.val());
+//         //   setStopData(false);
+//         setdatafirebase(snapshot.val())
+//         } else {
+//           console.log("No data available");
+//         }
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   };
 
 
-const getDataFromFirebaseRecords = async () => {
-  get(child(dbRef, `record/`))
-    .then((snapshot) => {
-      if (snapshot.exists()) {
-      setGeneralRecords(snapshot.val())
-      } else {
-        console.log("No Accounts Available");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
+// const getDataFromFirebaseRecords = async () => {
+//   get(child(dbRef, `record/`))
+//     .then((snapshot) => {
+//       if (snapshot.exists()) {
+//       setGeneralRecords(snapshot.val())
+//       } else {
+//         console.log("No Accounts Available");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// };
 
 
 

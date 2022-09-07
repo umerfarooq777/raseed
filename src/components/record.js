@@ -45,36 +45,7 @@ const Record = ({ index,debit, credit }) => {
                     </tr>
                 )
             })}
-            {
-                // data ? data.map((obj, key) => {
-                //     if (obj.debit) {
-
-                //         return (
-                //             <TableContentSub objectDebit={obj.debit} />
-                //         )
-                //     }
-                //     else if (obj.credit) {
-                //         // console.log("🚀 ~ file: TableContent.js ~ line 10 ~ data?data.map ~ obj.debit", obj.credit)
-                //         obj.credit.map((temp,key)=>{
-                //         // console.log("🚀 ~ file: TableContent.js ~ line 18 ~ obj.credit.map ~ temp", temp)
-
-                //         })
-                //         return (
-                //             <TableContentSub objectCredit={obj.credit} />
-                //         )
-                //     }
-
-                // }) :
-                //     <tr>
-                //         <td>1</td>
-                //         <td>Mark</td>
-                //         <td>Otto</td>
-                //         <td>@mdo</td>
-                //         <td>@mdo</td>
-                //         <td>@mdo</td>
-                //         <td>@mdo</td>
-                //     </tr>
-            }
+            
         </>
     )
 }

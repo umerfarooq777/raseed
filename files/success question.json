@@ -4,7 +4,10 @@
     "Cash",
     "Office Equipment",
     "Sales",
-    "Rent Expense"
+    "Rent Expense",
+    "Salaries Expense",
+    "Note Payable",
+    "Land"
   ],
   "record": [
     {
@@ -86,6 +89,73 @@
           "type": "debit"
         }
       ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "4000",
+          "category": "asset",
+          "date": "2022-09-05",
+          "title": "Cash",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "4000",
+          "category": "expense",
+          "date": "2022-09-05",
+          "title": "Salaries Expense",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "5000",
+          "category": "equity",
+          "date": "2022-09-05",
+          "title": "Capital",
+          "type": "credit"
+        },
+        {
+          "amount": "10000",
+          "category": "liability",
+          "date": "2022-09-05",
+          "title": "Note Payable",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "15000",
+          "category": "asset",
+          "date": "2022-09-05",
+          "title": "Cash",
+          "type": "debit"
+        }
+      ]
+    },
+    {
+      "credit": [
+        {
+          "amount": "20000",
+          "category": "asset",
+          "date": "2022-09-15",
+          "title": "Cash",
+          "type": "credit"
+        }
+      ],
+      "debit": [
+        {
+          "amount": "20000",
+          "category": "asset",
+          "date": "2022-09-15",
+          "title": "Land",
+          "type": "debit"
+        }
+      ]
     }
   ],
   "transactions": [
@@ -157,6 +227,69 @@
         "amount": "1000",
         "category": "asset",
         "date": "2022-09-09",
+        "title": "Cash",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "4000",
+        "category": "asset",
+        "date": "2022-09-05",
+        "title": "Cash",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "4000",
+        "category": "expense",
+        "date": "2022-09-05",
+        "title": "Salaries Expense",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "15000",
+        "category": "asset",
+        "date": "2022-09-05",
+        "title": "Cash",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "5000",
+        "category": "equity",
+        "date": "2022-09-05",
+        "title": "Capital",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "10000",
+        "category": "liability",
+        "date": "2022-09-05",
+        "title": "Note Payable",
+        "type": "credit"
+      }
+    },
+    {
+      "data": {
+        "amount": "20000",
+        "category": "asset",
+        "date": "2022-09-15",
+        "title": "Land",
+        "type": "debit"
+      }
+    },
+    {
+      "data": {
+        "amount": "20000",
+        "category": "asset",
+        "date": "2022-09-15",
         "title": "Cash",
         "type": "credit"
       }

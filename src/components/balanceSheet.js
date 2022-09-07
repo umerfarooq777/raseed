@@ -10,7 +10,7 @@ import IncomeSheet from "./income sheet/incomeSheet";
 import { IncomeContext } from "../context/incomeContext";
 // import TableContent from "react-bootstrap/TableContent";
 
-function BalanceSheet() {
+function BalanceSheet() { 
   const { EquityTotal, AssetArray, LiabilityArray } = useContext(IncomeContext);
   // console.log("🚀 ~ file: balanceSheet.js ~ line 15 ~ BalanceSheet ~ AssetArray", AssetArray)
   const [firebaseData, setFirebaseData] = useState([]);
@@ -175,7 +175,7 @@ function BalanceSheet() {
                   <th colSpan={5}>Description/Account</th>
                   <th></th>
                   <th>Total Balance</th>
-                </tr> 
+                </tr>   
               </thead>   
               {filtered ? (
                 filtered.map((obj, key) => {
@@ -193,7 +193,7 @@ function BalanceSheet() {
                         bal={balance}
                       />
                     </>
-                  );
+                  ); 
                 })
               ) : (
                 <>
